@@ -5,11 +5,13 @@ exercises: 5
 questions:
 objectives:
 - Learn how to remote access Setonix
+- Learn about Pawsey-specific user shortcuts and their meanings
+- Set up the working environment by downloading lesson materials
 keypoints:
 - Logging on to Pawsey systems uses SSH (secure shell)
 ---
 ### Getting your user names and passwords
-We have created some training usernames and passwords for you. These are available on the google sheet linked on the PowerPoint slide. Go to that link and put your name next to one of the usernames to claim it for yourself. That will be your username and password for this whole class.
+We have created some training usernames and passwords for you. These are available on the google sheet linked on the PowerPoint slide. Go to that link and put your name next to one of the usernames to claim it for yourself. That will be your username and password for this whole workshop.
 
 ### Logging on to Setonix with Terminal or Windows PowerShell
 Your user name and password will be supplied. Within a terminal window, type:
@@ -33,7 +35,7 @@ Host name is `setonix.pawsey.org.au`
 
 Port is `22`
 
-User name is the name you selected on the training accounts sheet- e.g. something like `cou001`
+User name is the name you selected on the training accounts sheet e.g. something like `cou001`
 
 Helpful link: [https://www.hostinger.com/tutorials/how-to-use-putty-ssh](https://www.hostinger.com/tutorials/how-to-use-putty-ssh)
 
@@ -45,7 +47,7 @@ To save you some time typing, Pawsey has set up some shortcuts for all users. We
 |----------|----------|
 | $USER | Your unique user ID. e.g. `cou001` or `sbeecroft` |
 | $PAWSEY_PROJECT | Your default project code (some people are members of multiple projects). e.g. `courses` or `pawsey1086` |
-| $MYSCRATCH | Path to your default scratch diretory. e.g. `/scratch/courses/cou001/` |
+| $MYSCRATCH | Path to your default scratch directory. e.g. `/scratch/courses/cou001/` |
 | $MYSOFTWARE | Path to your default software directory. e.g. `/software/projects/courses/cou001` |
 
 
@@ -57,4 +59,11 @@ cd $MYSCRATCH
 git clone https://github.com/SarahBeecroft/Intro2HPC.git
 cd Intro2HPC/exercises
 ls
+```
+
+If you've successfully cloned the git repo, the `ls` command will return the following:
+
+```bash
+_config.yml      _episodes_rmd    _includes        aio.md           AUTHORS          CITATION         CONDUCT.md       exercises        favicon-lc.ico   index.md         Makefile         reference.md     setup
+_episodes        _extras          _layouts         assets           bin              code             CONTRIBUTING.md  favicon-dc.ico   favicon-swc.ico  LICENSE.md       README.md        requirements.txt setup.md
 ```
