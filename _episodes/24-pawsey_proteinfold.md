@@ -16,16 +16,17 @@ Inspect the `abacbs_workshop.config` from the workshop repo to to see that workf
 
 ```
 withName: 'RUN_ALPHAFOLD2' {
-    container = '/scratch/pawsey1017/tlitfin/ABACBS/containers/alphafold2.sif'
+    container = '/software/projects/pawsey1017/tlitfin/ABACBS/containers/alphafold2.sif'
     time = { 12.h }
     cpus = 8
 }
 ```
 
 ### Reference data
-Recall that structure prediction relies on collecting homologous proteins in a multiple sequence alignment (MSA) to identify coevolutionary information indicating likely structural contacts. These homologs are identified from enormous reference sequence databases.
+Recall that structure prediction relies on collecting homologous proteins in a multiple sequence alignment (MSA) to identify coevolutionary information indicating likely structural contacts. These homologs are identified from enormous reference sequence databases. Check that these databases are available on Setonix.
 
 ```
+ls /scratch/references/alphafold_minidbs/databases/
 databases/
     ├── bfd
     ├── mgnify
@@ -39,9 +40,14 @@ databases/
     └── uniref90 
 ```
 
+> ## Note
+> 
+> We are using minituare versions of the databases for the purpose of the workshop but real versions are available at `/scratch/references/alphafold_feb2024/databases/`
+{: .caution}
+
 ### Prepare samplesheet
 
-We can prepare a nextflow samplesheet containing our protein input in fasta format. Multiple proteins can be predicted with a single workflow execution by 
+We can prepare a nextflow samplesheet containing our protein input in fasta format. Multiple proteins can be predicted with a single workflow execution by adding rows to an input samplesheet.
 
 ``` csv
 id,sequence

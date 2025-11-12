@@ -14,7 +14,7 @@ keypoints:
 Pawsey has pre-installed Nextflow and Singularity which can be loaded in your user environment using
 
 ```bash
-module load module load nextflow/24.10.0 #TODO: test this (prefer not conda installed)
+module load nextflow/25.04.6 #TODO: test this (prefer not conda installed)
 module load singularity/4.1.0-slurm
 ```
 
