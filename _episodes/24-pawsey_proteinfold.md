@@ -1,12 +1,12 @@
 ---
 title: "Run nf-core/proteinfold on Setonix"
 teaching: 5
-exercises: 15
+exercises: 20
 questions:
 objectives:
-- Locate the resources available to support running alphafold on Setonix.
-- Prepare a nextflow configuration file to utilise available resources.
-- Run nfcore/proteinfold nextflow workflow on Setonix.
+- Locate the resources available to support running AlphaFold2 on Setonix.
+- Prepare a Nextflow configuration file to utilise available resources.
+- Run nfcore/proteinfold Nextflow workflow on Setonix.
 keypoints:
 - Software designed for GPU execution is often compiled for Nvidia GPUS.
 - Custom images can be built to support execution using AMD GPUs
@@ -17,31 +17,40 @@ keypoints:
 <img src="/assets/img/abacbs-proteinfold-metromap.svg" alt="pfold" width="800"/>
 </p>
 
+## nf-core/proteinfold
+- [proteinfold](https://github.com/nf-core/proteinfold/tree/dev) is a Nextflow pipeline designed to support numerous models for molecular structure prediction.
+- Today, we will use proteinfold to predict the structure of our uncharacterised protein using the AlphaFold2 model.
+- We will use a development branch of proteinfold to access some of the latest features that are not yet available in the current release.
+
+```bash
+#module load nextflow/25.04.6 # This should still be loaded from the previous exercise
+nextflow pull nf-core/proteinfold
+```
+
+```bash
+tree ~/.nextflow/assets/nf-core/proteinfold/
+```
+
 > ## Setup environment
 > - The previous exercise didn’t use containers, but they are one of the most effective ways to manage software in workflow development, especially with Nextflow.
 > - In this exercise, we will be using singularity containers and so we need to load the corresponding module on Setonix.
 >
 > ```bash
 > module load singularity/4.1.0-slurm
-> #module load nextflow/25.04.6 # This should still be loaded from the previous exercise
 > ```
+> <br>
+> > ## **Why containers?**
+> >
+> > A container is a lightweight, portable environment that bundles an application together with everything it needs to run such as libraries, dependencies, and system tools. It is a simple and reliable alternative to installing software directly on your system or HPC environment (which often requires managing dependencies manually).
+> > On HPC systems, this means isolation from other environments, reproducibility across platforms, and simplified maintenance without manual installs or dependency troubleshooting. 
+> >
+> > It is recommended to pull containers from trusted sources like [BioContainers](https://biocontainers.pro/), [quay.io](quay.io) or [Seqera](https://seqera.io/containers/). During execution, Nextflow automatically pulls required images, often from these repositories, and stores them in the work directory.
+> {: .solution} 
 >
-> **Why containers?**
+> - Define the following environment variables prior to executing the workflow.
+> - These variables tell Nextflow and Singularity where to find and store container images so you don’t waste time and space downloading them repeatedly.
+> - **Note: These environment variables need to be set each time you log in to the HPC system (or include them in your job submission script before running Nextflow).**
 >
-> A container is a lightweight, portable environment that bundles an application together with everything it needs to run such as libraries, dependencies, and system tools. It is a simple and reliable alternative to installing software directly on your system or HPC environment (which often requires managing dependencies manually).
-> On HPC systems, this means isolation from other environments, reproducibility across platforms, and simplified maintenance without manual installs or dependency troubleshooting. 
->
-> It is recommended to pull containers from trusted sources like [BioContainers](https://biocontainers.pro/), [quay.io](quay.io) or [Seqera](https://seqera.io/containers/). During execution, Nextflow automatically pulls required images, often from these repositories, and stores them in the work directory.
-> 
-> **Why Set Environment Variables Before Submitting Nextflow Jobs?**
-> When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s work/ directory, which can be inefficient and waste storage if you run multiple workflows.
->
-> Setting environment variables allows you to:
-> - Cache container images in a shared location → Avoid repeated downloads and speed up execution.
-> - Control storage paths → Prevent filling up your home directory or job scratch space.
-> - Ensure reproducibility → Use the same cached image across multiple runs and workflows.
-> 
-> How to set environmental variables:
 > ~~~
 > mkdir $MYSCRATCH/containers
 > export SINGULARITY_CACHEDIR=$MYSCRATCH/containers
@@ -50,10 +59,25 @@ keypoints:
 > export NXF_SINGULARITY_LIBRARYDIR=/scratch/references/abacbs2025/containers
 > ~~~
 > {: .source}
+> <br>
 >
-> These variables tell Nextflow and Singularity where to find and store container images so you don’t waste time and space downloading them repeatedly.
+> - Confirm that several images are visible to nextflow by:
+>
+> ~~~
+> ls $SINGULARITY_LIBRARYDIR
+> ~~~
+> {: .source}
+> <br>
+>
+> > ## **Why Environment Variables?**
+> > When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s work/ directory, which can be inefficient and waste storage if you run multiple workflows.
+> >
+> > Setting environment variables allows you to:
+> > - Cache container images in a shared location → Avoid repeated downloads and speed up execution.
+> > - Control storage paths → Prevent filling up your home directory or job scratch space.
+> > - Ensure reproducibility → Use the same cached image across multiple runs and workflows.
+> {: .solution}
 > 
->**Note: These environment variables need to be set each time you log in to the HPC system Or include them in your job submission script before running Nextflow.**
 >
 {: .keypoints}
 
@@ -62,9 +86,9 @@ keypoints:
 - Default containers [hosted](https://quay.io/organization/nf-core) by the nf-core organisation support Nvidia hardware and will not run on the Setonix AMD gpus. 
 - Pawsey provides a number of AMD-compatible [containers](https://quay.io/organization/pawsey) which can be used to run structure prediction models. 
 - Pre-built images have been made provided for the workshop today at `/scratch/references/abacbs2025/containers`. 
-- We can configure the workflow to use these images by defining their path in a custom Nextflow config.
+- We can configure the workflow to use these non-standard images by defining their path in a custom Nextflow config.
 
-Inspect the `abacbs_workshop.config` from the workshop repo to to see that workflow modules are configured to use non-standard images available on Setonix.
+Open the `abacbs_workshop.config` file to confirm that the workflow modules are configured to use non-standard images available on Setonix.
 
 ```
 withName: 'RUN_ALPHAFOLD2' {
@@ -76,9 +100,10 @@ withName: 'RUN_ALPHAFOLD2' {
 ```
 
 ## Reference data
-- Recall that structure prediction relies on collecting homologous proteins in a multiple sequence alignment (MSA) to identify coevolutionary information indicating likely structural contacts. 
-- These homologs are identified from enormous reference sequence databases which can be a performance bottleneck. 
-- We have prepared miniature databases for this workshop with only the minimum number of sequences required 
+- Recall that structure prediction relies on collecting homologous proteins in a multiple sequence alignment (MSA) to identify coevolutionary information.
+- These homologs are identified from enormous reference sequence databases.
+- Searching these large databases can be a performance bottleneck. 
+- We have prepared miniature databases for this workshop with only the minimum number of sequences required to predict our target protein. 
 - Check that these databases are available on Setonix.
 
 ```bash
@@ -128,7 +153,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 ```
 
 > ## Job monitoring
-> We can confirm that our job is running with: 
+> - We can confirm that our job is running with: 
 > 
 > ~~~
 > squeue --me
@@ -157,9 +182,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > {: .source}
 {: .prereq}
 
-A basic run of AlphaFold2 using the official implementation consumes XX SUs on the Setonix system. However, a significant portion of execution time is used to search large sequence databases and does not utilize the allocated GPU.
-
-## Job Accounting
+### Job Accounting
 - Download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
 
 > ## Execution timeline
@@ -168,7 +191,7 @@ A basic run of AlphaFold2 using the official implementation consumes XX SUs on t
 > {% endraw %}
 {: .solution }
 
-> ## Service units consumed
+> ## Service units
 > - We can again use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
 > - A full scale execution was completed in 0.75 hours using a single GPU (neglible CPU time).
 >
@@ -178,14 +201,15 @@ A basic run of AlphaFold2 using the official implementation consumes XX SUs on t
 > 512 × 0.1250 × 1 × 0.75 = 48 SUs
 > GPU Proportion: 1 GCDs / 8 total GCDs = 0.1250
 > ~~~
->
+> 
+> - A basic run of AlphaFold2 using the official implementation consumes 48 SUs on the Setonix system. 
 > - Compare this with the execution time for the demo run from this workshow using the miniature databases.
-> - **Conclusion: A large portion of the execution time is spent searching the sequence databases.**
+> - **Conclusion: A large portion of the execution time is spent searching the sequence databases which does not require using a GPU.**
 >
-{: .prereq}
+{: .solution}
 
 
-## Split MSA
+## Split MSA run
 
 <p align="center">
 <img src="/assets/img/abacbs-af2-split.png" alt="af2split" width="800"/>
@@ -193,9 +217,12 @@ A basic run of AlphaFold2 using the official implementation consumes XX SUs on t
 
 ``` bash
 nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
-    --outdir test-out --db ../databases/ --mode alphafold2 --use_gpu --alphafold2_mode "split_msa_prediction" \
+    --outdir output-split --db ../databases/ --mode alphafold2 --use_gpu --alphafold2_mode "split_msa_prediction" \
     -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT
 ```
+
+### Job Accounting
+- Download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
 
 > ## Execution timeline
 > {% raw %}
@@ -205,7 +232,7 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 >
 {: .solution }
 
-> ## Service units consumed
+> ## Service units
 > - We can again use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost.
 > - A full scale execution was completed in 0.16 hours using a single GPU and 0.3 hours of CPU time.
 >
@@ -225,12 +252,12 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 > 512 × 0.1250 × 1 × 0.16 = 10.24 SUs
 > GPU Proportion: 1 GCDs / 8 total GCDs = 0.1250
 > ~~~
-{: .prereq}
-
-Compare the SU rate of XX node compared to YY node.
-
-```
-Standard:               48   SUs
-Split MSA: 5.3 + 10.2 = 15.5 SUs
-```
-**Running AlphaFold2 in split mode (whereby CPU-bound search is conducted on a CPU node) can significantly reduce SU consumption.**
+>
+> Compare the SU rate of XX node compared to YY node.
+>
+> ~~~
+> Standard:               48   SUs
+> Split MSA: 5.3 + 10.2 = 15.5 SUs
+> ~~~
+> **Running AlphaFold2 in split mode (whereby CPU-bound search is conducted on a CPU node) can significantly reduce SU consumption.**
+{: .solution}

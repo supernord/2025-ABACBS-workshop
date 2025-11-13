@@ -5,7 +5,8 @@ exercises: 5
 questions:
 objectives:
 keypoints:
-    - Nextflow will distribute work over available resources
+    - Nextflow will distribute work over available resources.
+    - We could also screen candidate interactions to uncover functional clues.
 ---
 
 ### Binding partners

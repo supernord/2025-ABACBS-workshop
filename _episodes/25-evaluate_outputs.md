@@ -42,7 +42,7 @@ External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/on
 </p>
 
 - Recall that high quality predictions of novel structures rely on co-evolution data derived from multiple sequence alignments.
-- 
+- There are several other outputs in the `examples/` directory. 
 
 
 
