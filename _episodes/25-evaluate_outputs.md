@@ -4,6 +4,7 @@ teaching: 10
 exercises: 0
 questions: 
     - Is this prediction of sufficient quality for downstream analysis?
+    - Is the MSA sufficiently deep for a high confidence novel prediction?
 objectives:
 keypoints:
     - Structure predictions should be interpreted in the context of model confidence.

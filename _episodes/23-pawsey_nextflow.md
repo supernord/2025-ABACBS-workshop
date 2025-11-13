@@ -134,8 +134,8 @@ The image is divided into two main sections:
 Setonix has pre-installed modules that can be loaded by specifying the module name and version.
 Load nextflow into your user environment:
 
-```
-module load nextflow/24.10.0
+```bash
+module load nextflow/25.04.6
 ```
 
 Now, run the pipeline. We are running a minimum pipeline that relies on defaults capture in the `main.nf` and `nextflow.config`:
@@ -218,40 +218,3 @@ nextflow run main.nf --input assets/samplesheet.csv
 {: .solution }
 
 Congratulations, you have run a nextflow pipeline on setonix ... Now go use it for fun science!
-
-> ## Containers in Nextflow Workflows
-> The current doesn’t use containers, but they are one of the most effective ways to manage software in workflow development, especially with Nextflow.
->
-> “Friends don’t let friends use conda/mamba with Nextflow, ESPECIALLY on HPC”
-> **-Sarah Beecroft, Pawsey**
->
-> **Why containers?**
->
-> A container is a lightweight, portable environment that bundles an application together with everything it needs to run such as libraries, dependencies, and system tools. It is a simple and reliable alternative to installing software directly on your system or HPC environment (which often requires managing dependencies manually).
-> On HPC systems, this means isolation from other environments, reproducibility across platforms, and simplified maintenance without manual installs or dependency troubleshooting. 
->
-> It is recommended to pull containers from trusted sources like [BioContainers](https://biocontainers.pro/), [quay.io](quay.io) or [Seqera](https://seqera.io/containers/). During execution, Nextflow automatically pulls required images, often from these repositories, and stores them in the work directory.
-> 
-> **Why Set Environment Variables Before Submitting Nextflow Jobs?**
-> When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s work/ directory, which can be inefficient and waste storage if you run multiple workflows.
->
->Setting environment variables allows you to:
-> - Cache container images in a shared location → Avoid repeated downloads and speed up execution.
-> - Control storage paths → Prevent filling up your home directory or job scratch space.
-> - Ensure reproducibility → Use the same cached image across multiple runs and workflows.
-> 
-> How to set environmental variables:
-> ```bash 
-> export SINGULARITY_CACHEDIR=/path/to/cache
-> export SINGULARITY_LIBRARYDIR=/path/to/library
-> export NXF_SINGULARITY_CACHEDIR=/path/to/cache
-> export NXF_SINGULARITY_LIBRARYDIR=/path/to/libraryShow more lines
-> ```
->
-> These variables tell Nextflow and Singularity where to store container images so you don’t waste time and space downloading them repeatedly.
-> 
->**Note: These environment variables need to be set each time you log in to the HPC system Or include them in your job submission script before running Nextflow.**
->
-{: .keypoints}
-
-# TODO: Any extra background here?
