@@ -17,6 +17,6 @@ Like this tutorial?  **Star** it on [Github (button on top right)](https://githu
 
 ## Acknowledgements
 
-This tutorial is based on [Intro2HPC](https://github.com/SarahBeecroft/Intro2HPC).
-
-This work is supported by [Australian BioCommons](https://www.biocommons.org.au/) via funding from [Bioplatforms Australia](https://bioplatforms.com/). Bioplatforms Australia is funded by the National Collaborative Research Infrastructure Strategy (NCRIS).
+- This tutorial is based on [Intro2HPC](https://github.com/SarahBeecroft/Intro2HPC).
+- This work is supported by [Australian BioCommons](https://www.biocommons.org.au/) via funding from [Bioplatforms Australia](https://bioplatforms.com/). 
+- Bioplatforms Australia is funded by the National Collaborative Research Infrastructure Strategy (NCRIS).

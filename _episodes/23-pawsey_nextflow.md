@@ -1,5 +1,5 @@
 ---
-title: "Run NextFlow pipeline on Setonix"
+title: "Run Nextflow pipeline on Setonix"
 teaching: 0
 exercises: 5
 questions:
@@ -21,7 +21,7 @@ keypoints:
 {: .keypoints}
 
 
->## What is "nextflow"?
+>## What is "Nextflow"?
 > Nextflow DSL2, based on Groovy, lets you take your analysis code and easily wrap it into a modular, automated pipeline. It helps bioinformaticians build reproducible workflows that run anywhere.
 >
 > **Why Use Nextflow?**
@@ -43,7 +43,7 @@ keypoints:
 
 ### Running a nextflow workflow
 
-Today we’ll run a shortened Nextflow demo based on a [nextflow template](https://github.com/Sydney-Informatics-Hub/template-nf) developed at the University of Sydney. This example highlights basic Nextflow functionality through a simple genomics workflow. For the full demo and detailed explanations, visit the [documentation](https://sydney-informatics-hub.github.io/template-nf-guide/)..
+Today we’ll run a shortened Nextflow demo based on a [nextflow template](https://github.com/Sydney-Informatics-Hub/template-nf) developed at the University of Sydney. This example highlights basic Nextflow functionality through a simple genomics workflow. For the full demo and detailed explanations, visit the [documentation](https://sydney-informatics-hub.github.io/template-nf-guide/).
 
 > ## Demo Scenario
 > This demo simulates the start of a larger workflow where samples need to be grouped by sequencing platform for downstream processing. It uses a single samplesheet (assets/samplesheet.csv) with sample names, FASTQ paths, and platform info (e.g., Illumina or PacBio).
@@ -217,4 +217,4 @@ nextflow run main.nf --input assets/samplesheet.csv
 >
 {: .solution }
 
-Congratulations, you have run a nextflow pipeline on setonix ... Now go use it for fun science!
+Congratulations, you have run a nextflow pipeline on setonix!

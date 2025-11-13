@@ -1,7 +1,7 @@
 ---
 title: "Run nf-core/proteinfold on Setonix"
 teaching: 5
-exercises: 10
+exercises: 15
 questions:
 objectives:
 - Locate the resources available to support running alphafold on Setonix.
@@ -17,18 +17,14 @@ keypoints:
 <img src="/assets/img/abacbs-proteinfold-metromap.svg" alt="pfold" width="800"/>
 </p>
 
-## Setup environment
-
-```bash
-module load singularity/4.1.0-slurm
-#module load nextflow/25.04.6 # This should still be loaded from the previous exercise
-```
-
-> ## Containers in Nextflow Workflows
-> The previous exercise didn’t use containers, but they are one of the most effective ways to manage software in workflow development, especially with Nextflow.
+> ## Setup environment
+> - The previous exercise didn’t use containers, but they are one of the most effective ways to manage software in workflow development, especially with Nextflow.
+> - In this exercise, we will be using singularity containers and so we need to load the corresponding module on Setonix.
 >
-> “Friends don’t let friends use conda/mamba with Nextflow, ESPECIALLY on HPC”
-> **-Sarah Beecroft, Pawsey**
+> ```bash
+> module load singularity/4.1.0-slurm
+> #module load nextflow/25.04.6 # This should still be loaded from the previous exercise
+> ```
 >
 > **Why containers?**
 >
@@ -40,20 +36,22 @@ module load singularity/4.1.0-slurm
 > **Why Set Environment Variables Before Submitting Nextflow Jobs?**
 > When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s work/ directory, which can be inefficient and waste storage if you run multiple workflows.
 >
->Setting environment variables allows you to:
+> Setting environment variables allows you to:
 > - Cache container images in a shared location → Avoid repeated downloads and speed up execution.
 > - Control storage paths → Prevent filling up your home directory or job scratch space.
 > - Ensure reproducibility → Use the same cached image across multiple runs and workflows.
 > 
 > How to set environmental variables:
-> ```bash 
-> export SINGULARITY_CACHEDIR=/path/to/cache
-> export SINGULARITY_LIBRARYDIR=/path/to/library
-> export NXF_SINGULARITY_CACHEDIR=/path/to/cache
-> export NXF_SINGULARITY_LIBRARYDIR=/path/to/library
-> ```
+> ~~~
+> mkdir $MYSCRATCH/containers
+> export SINGULARITY_CACHEDIR=$MYSCRATCH/containers
+> export SINGULARITY_LIBRARYDIR=/scratch/references/abacbs2025/containers
+> export NXF_SINGULARITY_CACHEDIR=$MYSCRATCH/containers
+> export NXF_SINGULARITY_LIBRARYDIR=/scratch/references/abacbs2025/containers
+> ~~~
+> {: .source}
 >
-> These variables tell Nextflow and Singularity where to store container images so you don’t waste time and space downloading them repeatedly.
+> These variables tell Nextflow and Singularity where to find and store container images so you don’t waste time and space downloading them repeatedly.
 > 
 >**Note: These environment variables need to be set each time you log in to the HPC system Or include them in your job submission script before running Nextflow.**
 >
@@ -62,9 +60,9 @@ module load singularity/4.1.0-slurm
 ## AMD-compatible images
 - The proteinfold workflow includes several modules that are executed on the GPU. 
 - Default containers [hosted](https://quay.io/organization/nf-core) by the nf-core organisation support Nvidia hardware and will not run on the Setonix AMD gpus. 
-- Pawsey provides a number of AMD-compatible [images](https://quay.io/organization/pawsey) which can be used to run structure prediction models. 
+- Pawsey provides a number of AMD-compatible [containers](https://quay.io/organization/pawsey) which can be used to run structure prediction models. 
 - Pre-built images have been made provided for the workshop today at `/scratch/references/abacbs2025/containers`. 
-- We can configure the workflow to use these images by defining their path in a custom NextFlow config.
+- We can configure the workflow to use these images by defining their path in a custom Nextflow config.
 
 Inspect the `abacbs_workshop.config` from the workshop repo to to see that workflow modules are configured to use non-standard images available on Setonix.
 
@@ -73,6 +71,7 @@ withName: 'RUN_ALPHAFOLD2' {
     container = '/scratch/references/abacbs2025/containers/alphafold2.sif'
     time = { 12.h }
     cpus = 8
+    memory = 32.GB
 }
 ```
 
@@ -90,17 +89,17 @@ You should see that alphafold databases are available here.
 
 ```
 databases/
-    ├── bfd
     ├── mgnify
     ├── params
     ├── pdb70
     ├── pdb_mmcif
-    ├── pdb_seqres
+    ├── **pdb_seqres**
     ├── small_bfd
-    ├── uniprot
+    ├── **uniprot**
     ├── uniref30
     └── uniref90 
 ```
+**TOM TODO: MULTIMER DBS**
 
 > ## Note
 > Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. These databases will NOT generate high-quality predictions for other protein targets. Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.
@@ -112,7 +111,7 @@ We can prepare a nextflow samplesheet containing our protein input in fasta form
 
 ``` csv
 id,sequence
-prot1,fasta/A0A0U5EPG3.fasta
+prot1,fasta/PNK_0205.fasta
 ```
 
 ## Basic run
@@ -124,11 +123,9 @@ prot1,fasta/A0A0U5EPG3.fasta
 
 ``` bash
 nextflow run nf-core/proteinfold/ --input samplesheet.csv \
-    --outdir output/ --db /scratch/references/alphafold_minidbs/databases/ --mode alphafold2 --use_gpu --alphafold2_mode "standard" \
+    --outdir output/ --db /scratch/references/abacbs2025/databases/ --mode alphafold2 --use_gpu --alphafold2_mode "standard" \
     -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT -r 09ac089
 ```
-
-
 
 > ## Job monitoring
 > We can confirm that our job is running with: 
@@ -150,7 +147,9 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > ssh <node>
 > ~~~
 > {: .source}
-> - Type `yes` when prompted
+>
+> - Type `yes` when prompted and then enter your workshop account password at the password prompt.
+> - **Note: you can only connect to nodes where you have an active job running**
 >
 > ~~~
 > watch rocm-smi
@@ -167,11 +166,23 @@ A basic run of AlphaFold2 using the official implementation consumes XX SUs on t
 > {% raw %}
 > <img src="/assets/img/abacbs-af2-timeline.png" alt="af2tl" width="1200"/>
 > {% endraw %}
->
->
 {: .solution }
 
-- We can use the Pawesey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
+> ## Service units consumed
+> - We can again use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
+> - A full scale execution was completed in 0.75 hours using a single GPU (neglible CPU time).
+>
+> ~~~
+> Calculation Breakdown
+> SUs = Partition Charge Rate × Max Proportion × Nodes × Hours
+> 512 × 0.1250 × 1 × 0.75 = 48 SUs
+> GPU Proportion: 1 GCDs / 8 total GCDs = 0.1250
+> ~~~
+>
+> - Compare this with the execution time for the demo run from this workshow using the miniature databases.
+> - **Conclusion: A large portion of the execution time is spent searching the sequence databases.**
+>
+{: .prereq}
 
 
 ## Split MSA
@@ -194,11 +205,32 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 >
 {: .solution }
 
+> ## Service units consumed
+> - We can again use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost.
+> - A full scale execution was completed in 0.16 hours using a single GPU and 0.3 hours of CPU time.
+>
+> **CPU**
+> ~~~
+> SUs = Partition Charge Rate × Max Proportion × Nodes × Hours
+> 128 × 0.1391 × 1 × 0.3 = 5.343 SUs
+>
+> Core Proportion: 8 cores / 128 total cores = 0.0625
+> Memory Proportion: 32 GB / 230 GB total for accounting = 0.1391
+> Max Proportion (Memory): 0.1391
+> ~~~
+> <br>
+> **GPU**
+> ~~~
+> SUs = Partition Charge Rate × Max Proportion × Nodes × Hours
+> 512 × 0.1250 × 1 × 0.16 = 10.24 SUs
+> GPU Proportion: 1 GCDs / 8 total GCDs = 0.1250
+> ~~~
+{: .prereq}
+
 Compare the SU rate of XX node compared to YY node.
 
 ```
-XX: 
-YY: 
+Standard:               48   SUs
+Split MSA: 5.3 + 10.2 = 15.5 SUs
 ```
-
-As a result, running AlphaFold2 in split mode whereby CPU-bound search is conducted on a CPU node significantly reduces SU consumption.
+**Running AlphaFold2 in split mode (whereby CPU-bound search is conducted on a CPU node) can significantly reduce SU consumption.**
