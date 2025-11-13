@@ -18,7 +18,6 @@ keypoints:
 id,sequence
 pair1,fasta/SctK-SctD.fasta
 pair2,fasta/SctK-SctQ.fasta
-trimer,fasta/SctK-SctQ-SctD.fasta
 ```
 
 ### Execution trace
