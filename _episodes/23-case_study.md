@@ -25,10 +25,10 @@ We’ll use this as a representative example of an uncharacterised gene and expl
 
 Specifically, we’ll:
 
-- Predict the protein’s 3D structure
-- Search for similar annotated structures
-- Compare gene neighborhoods of our protein and the matched structure
-- Predict interaction partners based on known functional associations
+- Predict the protein’s 3D structure.
+- Search for similar annotated structures.
+- Compare gene neighborhoods of our protein and the matched structure.
+- Predict interaction partners based on known functional associations.
 - Integrate all evidence to propose a functional hypothesis.
 
 <p align="center">

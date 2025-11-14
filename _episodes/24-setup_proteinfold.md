@@ -6,11 +6,10 @@ questions:
 objectives:
 - Locate the resources available to support running AlphaFold2 on Setonix.
 - Prepare a Nextflow configuration file to utilise available resources.
-- Run nfcore/proteinfold Nextflow workflow on Setonix.
 keypoints:
 - Software designed for GPU execution is often compiled for Nvidia GPUS.
-- Custom images can be built to support execution using AMD GPUs
-- Workflows can be configured to use custom images
+- Custom images can be built to support execution using AMD GPUs.
+- Workflows can be configured to use custom images.
 ---
 
 <p align="center">
@@ -128,5 +127,5 @@ databases/
 **TOM TODO: MULTIMER DBS**
 
 > ## Note
-> Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. These databases will NOT generate high-quality predictions for other protein targets. Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.
+> Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. These databases will **NOT** generate high-quality predictions for other protein targets. Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.
 {: .keypoints}

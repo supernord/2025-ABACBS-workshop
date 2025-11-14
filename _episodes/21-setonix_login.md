@@ -40,7 +40,8 @@ User name is the name you selected on the training accounts sheet e.g. something
 Helpful link: [https://www.hostinger.com/tutorials/how-to-use-putty-ssh](https://www.hostinger.com/tutorials/how-to-use-putty-ssh)
 
 > ## Important
-> **Login with two separate terminals now. 1 will be used to browse outputs and monitor jobs.**
+> - **Login with two separate terminals now.**
+> - **One will be used to browse outputs and monitor jobs.**
 {: .prereq}
 
 ### Useful shortcuts that Pawsey sets up for you

@@ -6,22 +6,177 @@ questions:
 objectives:
 keypoints:
     - Nextflow will distribute work over available resources.
-    - We could also screen candidate interactions to uncover functional clues.
+    - Workflows can be resumed without re-doing completed tasks.
 ---
 
-### Binding partners
-- In the canonical Type III secretion system, SctK forms direct interactions with SctD and SctQ.
-- 
+## Binding partners
+- In the canonical Type III secretion system, is known to form direct interactions with SctD and SctQ.
+- Can we identify the SctD and SctQ genes in our target genome?
+- Let's view our [assembly](https://www.ncbi.nlm.nih.gov/nuccore/LN879502.1) on the NCBI website and search for genes annotated as SctD and SctK.
 
-### Construct samplesheet
+> ## SctD
+> 
+> ~~~
+> gene            complement(430545..432425)
+>                 /gene="sctD"
+>                 /locus_tag="PNK_0343"
+> CDS             complement(430545..432425)
+>                 /gene="sctD"
+>                 /locus_tag="PNK_0343"
+>                 /function="FOG: FHA domain"
+>                 /codon_start=1
+>                 /transl_table=11
+>                 /product="putative type III secretion system protein SctD"
+>                 /protein_id="CUI15980.1"
+>                 /translation="MVARLVAEEGDLKGLILSLENGDTWVIGRDPDECQLVIQDPLTS
+>                 RKHLVARRTPEGISVENLSSTNPIQINEEEIGEQPRILQQGDTVKIGNEVFRYYTDTS
+>                 AHVLDEGSPSEVKEPSEQTPIEIDDHPNPASAYPLHSQDRSESEEEKENDTIFDEDEE
+>                 SFSPLAEINFGIAETGRWLLKVIGGPNNGAEFYMQAGHSYILGTDPHSCDIVFQDTSV
+>                 SRQHAKIIVSPEDSLAIEDLKSRNGVLVSGAPVEGKQALIPSMIVTIGTTSFVVYDRE
+>                 GEMQTIISPLLPSIVKVLQHEEEAPKIEEVPPPAPVEVEAAAATPPPEPAHHFGPYIL
+>                 LAIIIGLFVLAGIGTTALFKSEPVVTLTQENAPELVQQALDSFPAVRHSYNKTSGNLL
+>                 LLGHVRSQAEKNQLMYNLQGLKFIKNIDDSGIIIDEFVWREINSVLSKDPAWKGITIH
+>                 SPEAGQFILSGYLETRKQAEQLSDYISVNFPYLDLLKKQVVVEEDVITQINVWLQTFN
+>                 LRGVSAKIANGGEVTLSGNAPSDKAGEITQLIAKIKGISGVRLVNNYIKSEAPEMGIV
+>                 NLSDRYEITGQSRLGTRYTVVINGRILSEGDSLDSMVITSIKPHAVFLEKDGTKYRID
+>                 YK"
+> ~~~
+{: .solution}
+
+> ## SctQ
+> 
+> ~~~
+> gene            complement(421992..423308)
+>                 /gene="sctQ"
+>                 /locus_tag="PNK_0334"
+> CDS             complement(421992..423308)
+>                 /gene="sctQ"
+>                 /locus_tag="PNK_0334"
+>                 /function="Flagellar motor switch/type III secretory
+>                 pathway protein"
+>                 /codon_start=1
+>                 /transl_table=11
+>                 /product="putative type III secretion translocase SctQ"
+>                 /protein_id="CUI15971.1"
+>                 /translation="MTTPPTSYDWIRTIDPELKALDTIPLTGAAPSFPWADLSSRLAR
+>                 SFDREGFSIQPKDIMWRTTDQLYDGLGDSPFPLIFAVPILKGDVCWVMPEQEMVLLET
+>                 WLLTKESHPISFQDRALSESFYRFFALEVLYHLSQTSFDKSIAPILTNKTVLPQEDAL
+>                 CLDISLSMHDQTLWGRLIISPDLRHSWVEHYASHGPSPLTQQMAQAVEVQVHLEAGKT
+>                 QLSLAEWSAVSLGDFIVLDSCSLDADGSAGRVMLTVNGKAAHRGKIKDGNLKILELPL
+>                 IQEVNPPPLQALNTPQEVPPPMAKHEDEDEDDLSDLDFTEDEELEDEESFDESLLNDE
+>                 EEEKLSPPPAKPVKPEPSKVETSAKPVSETPYTPEHIPVALTVEVGRIQMTMENLLRL
+>                 EPGNMLELNVHPEDGVDLTINGKLVGRGELLRIGENLGVRVLELGR"
+> ~~~
+{: .solution}
+
+- Let's see if our uncharacterised protein is predicted to form a high confidence interaction with either of these potential partners.
+- We can create multi-entity FASTA files containing the proteins intended to be predicted as a complex.
+
+> ## NOTE
+> - To reduce the time required for prediction, we have trimmed the SctD and SctQ genes to the minimal region which would be expected to interact with a *bona fide* SctK gene.
+{: .prereq}
+
+## Construct samplesheet
+
+- Check that the FASTA files for the two target complexes are available in the `fasta/` directory.
+
+```bash
+cat fasta/SctD-complex.fasta
+```
+
+```
+> PNK_0205
+MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRSTDLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLVMAALTQEQISGLNPVIAPSTLSNPVKTFIINQLYTLLKADEHLPYDYLPETDLSPLGTWSKARLTELIDFLGLHDLASEMRHIVDKNQLKNIYTSLSSKQFYYLKVCLHQKEILSVPKLGIDPSKRDSTKLKRIVHRRGLLRLGKALCGQHPDFVWYLAHTLDTGRGKLILNAYQPESVPQVTSFLKGQVLNLMNFLKSE
+> SctD
+IAETGRWLLKVIGGPNNGAEFYMQAGHSYILGTDPHSCDIVFQDTSVSRQHAKIIVSPEDSLAIEDLKSRNGVLVSGAPVEGKQALIPSMIVTIGTTSFVVYDREGEMQTIISP
+```
+
+```bash
+cat fasta/SctQ-complex.fasta
+```
+
+```
+> PNK_0205
+MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRSTDLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLVMAALTQEQISGLNPVIAPSTLSNPVKTFIINQLYTLLKADEHLPYDYLPETDLSPLGTWSKARLTELIDFLGLHDLASEMRHIVDKNQLKNIYTSLSSKQFYYLKVCLHQKEILSVPKLGIDPSKRDSTKLKRIVHRRGLLRLGKALCGQHPDFVWYLAHTLDTGRGKLILNAYQPESVPQVTSFLKGQVLNLMNFLKSE
+> SctQ
+WADLSSRLARSFDREGFSIQPKDIMWRTTDQLYDGLGDSPFPLIFAVPILKGDVCWVMPEQEMVLLETWLLTKESHPISFQDRALSESFYRFFALEVLYHLSQTSFDKSIAPILTNKTVLPQEDALCLDISLSMHDQTLWGRLIISPDLRHSWVEHYASHGPSPL
+```
+
+- Confirm that the samplesheet in the working directory points to the FASTA file for the first complex to be predicted.
 
 ``` csv
 id,sequence
-pair1,fasta/SctK-SctD.fasta
-pair2,fasta/SctK-SctQ.fasta
+pair1,fasta/SctD-complex.fasta
 ```
 
-### Execution trace
+- Edit the samplesheet to add a second row which points to the second FASTA file.
+
+> ## Check
+> ``` csv
+> id,sequence
+> pair1,fasta/SctD-complex.fasta
+> pair2,fasta/SctQ-complex.fasta
+> ```
+{: .solution}
+
+## Predict multimers
+
+```bash
+nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
+    --db /scratch/references/abacbs2025/databases/ \
+    --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
+    -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 09ac089
+```
+
+- Nextflow can automatically distribute work across the available compute resources.
+- In our second terminal, check the status of the queue.
+
+```bash
+squeue --me
+```
+
+```
+JOBID        USER ACCOUNT                   NAME EXEC_HOST ST     REASON START_TIME       END_TIME  TIME_LEFT NODES   PRIORITY       QOS
+34806314  tlitfin pawsey1017      nf-NFCORE_PROT nid002040  R       None 09:16:39         21:16:39   11:59:37     1      75342    normal
+34806313  tlitfin pawsey1017      nf-NFCORE_PROT nid002040  R       None 09:16:37         21:16:37   11:59:35     1      75342    normal
+```
+
+- We can see that multiple jobs have been initiated and are able to run in parallel.
+- In our original terminal, wait for the MSA jobs to finish as indicated by the tick below.
+
+```
+[de/35e5fe] NFC…ALPHAFOLD2:RUN_ALPHAFOLD2_MSA (pair2) | 2 of 2 ✔
+[fc/fb9ce4] NFC…LPHAFOLD2:RUN_ALPHAFOLD2_PRED (pair2) | 0 of 2
+[-        ] NFC…NFOLD:POST_PROCESSING:GENERATE_REPORT -
+[-        ] NFC…E_PROTEINFOLD:POST_PROCESSING:MULTIQC -
+```
+
+- Before the pipeline is completed, cancel the execution by pressing `Ctrl` + `c`.
+
+> ## Interruptions
+> - During long-running workflows, jobs can crash or be interrupted which can lead to lost progress.
+> - Nextflow has the ability to resume workflow executions without repeating completed work.
+{: .prereq}
+
+- Re-start our multimer predictions using the original command in combination with the `-resume` parameter.
+
+``` bash
+nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
+    --db /scratch/references/abacbs2025/databases/ \
+    --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
+    -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 09ac089 -resume
+```
+
+```
+[54/a90051] NFC…ALPHAFOLD2:RUN_ALPHAFOLD2_MSA (pair1) | 2 of 2, cached: 2 ✔
+[fc/fb9ce4] NFC…LPHAFOLD2:RUN_ALPHAFOLD2_PRED (pair1) | 0 of 2 
+[-        ] NFC…NFOLD:POST_PROCESSING:GENERATE_REPORT -
+[-        ] NFC…E_PROTEINFOLD:POST_PROCESSING:MULTIQC -
+```
+
+- We can see that Nextflow keeps track of completed tasks and continues from the latest checkpoint.
+
+## Execution trace
 
 Thought: Can we screen for potential interactions directly
 

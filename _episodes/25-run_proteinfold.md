@@ -76,7 +76,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 {: .solution }
 
 > ## Service units
-> - We can again use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
+> - We can use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
 > - A full scale execution was completed in 0.75 hours using a single GPU (neglible CPU time).
 >
 > ~~~
@@ -101,7 +101,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 
 ``` bash
 nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
-    --outdir output-split --db /scratch/references/abacbs2025/databases/ \
+    --outdir output-split/ --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --use_gpu --alphafold2_mode "split_msa_prediction" \
     -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT
 ```
@@ -138,7 +138,7 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 > GPU Proportion: 1 GCDs / 8 total GCDs = 0.1250
 > ~~~
 >
-> Compare the SU rate of XX node compared to YY node.
+> - Compare the SU cost of running all work on a GPU node compared with splitting the job to more efficiently use the appropriate resource.
 >
 > ~~~
 > Standard:               48   SUs
