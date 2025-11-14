@@ -1,0 +1,19 @@
+> ## **Background**
+This image is a conceptual diagram showing how Nextflow workflows are structured and how key components interact during execution.
+
+<p align="center">
+<img src="/assets/img/abacbs_nf_run.png" alt="run" width="1000"/>
+</p>
+
+The image is divided into two main sections:
+
+1. Top section – Represents the workflow definition and configuration layer. This section shows that Nextflow pipelines are modular, parameterised, and configurable via config files and profiles.
+
+2. Bottom section – Represents the execution layer, including processes, channels, parameters, and data flow.
+
+- Processes are modular, isolated tasks executed by an executor (local or HPC).
+- Work directory stores intermediate results for caching and reproducibility. Every process (`check_input`, `group_samples`, `generate_report`) runs in its own isolated subdirectory inside the `work/` directory.
+- Channels connect processes.
+- When a process finishes successfully, Nextflow can optionally "publish" its output files to a defined directory (e.g., `params.outdir` or `Results/`)
+- Parameters & Profiles: Enable flexible configuration and reproducibility.
+- Shared filesystem: Required for HPC execution and data staging.
