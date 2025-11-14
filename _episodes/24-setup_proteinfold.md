@@ -9,12 +9,26 @@ objectives:
 keypoints:
 - Software designed for GPU execution is often compiled for Nvidia GPUS.
 - Custom images can be built to support execution using AMD GPUs.
-- Workflows can be configured to use custom images.
+- Container images (Singularity) can be cached in a shared directory to avoid duplication and speed up workflows.
 ---
 
 <p align="center">
 <img src="/assets/img/abacbs-proteinfold-metromap.svg" alt="pfold" width="800"/>
 </p>
+
+## Setup
+
+- Before commencing the exercise, navigate to the relevant working directory
+
+```bash
+cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise2/
+ls
+```
+
+- You should see the following files which will be used in this exercise:
+
+```
+```
 
 ## nf-core/proteinfold
 - [proteinfold](https://github.com/nf-core/proteinfold/tree/dev) is a Nextflow pipeline designed to support numerous models for molecular structure prediction.
@@ -58,7 +72,6 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > export NXF_SINGULARITY_LIBRARYDIR=/scratch/references/abacbs2025/containers
 > ~~~
 > {: .source}
-> <br>
 >
 > - Confirm that several images are visible to nextflow by:
 >
@@ -66,7 +79,18 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > ls $NXF_SINGULARITY_LIBRARYDIR
 > ~~~
 > {: .source}
-> <br>
+>
+> ~~~
+> alphafold2_pred.sif
+> alphafold2.sif
+> boltz2_v2.0.3.sif
+> community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-24-241f0746484727a3633f544c3747bfb77932e1c8c252e769640bd163232d9112-data.img
+> community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-ef-eff0eafe78d5f3b65a6639265a16b89fdca88d06d18894f90fcdb50142004329-data.img
+> depot.galaxyproject.org-singularity-multiqc-1.27--pyhdfd78af_0.img
+> depot.galaxyproject.org-singularity-multiqc-1.29--pyhdfd78af_0.img
+> depot.galaxyproject.org-singularity-python-3.8.3.img
+> quay.io-nf-core-proteinfold_alphafold2_msa-dev.img
+> ~~~
 >
 > - If you execute a Nextflow workflow that requires a container that is not located in the shared $NXF_SINGULARITY_LIBRARYDIR, the pipeline will attempt to pull the container from a hosted repository and store the image in your personal $NXF_SINGULARITY_CACHEDIR.
 >

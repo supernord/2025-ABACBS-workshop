@@ -17,7 +17,7 @@ Despite the explosion in genomic data, a large fraction of genes remain annotate
 
 **The good news:** protein structures are often more conserved than sequences, and they are tightly linked to function. Recent advances in structure prediction (using tools we’ll explore today) allow us to analyse structures at genomic scale. By comparing predicted 3D structures to known proteins, we can uncover functional relationships that sequence-based approaches miss.
 
-### Case study: Case study: uncovering the function of a “hypothetical protein”
+### Case study: uncovering the function of a “hypothetical protein”
 
 In this session, we’ll walk through a case study from the genome of [Candidatus Protochlamydia naegleriophila](https://www.ncbi.nlm.nih.gov/nuccore/LN879502.1). This genome contains many hypothetical proteins. We’ll examine a gene annotated as a conserved hypothetical protein (locus tag PNK_0205).
 
