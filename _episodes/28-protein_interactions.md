@@ -9,10 +9,14 @@ keypoints:
     - Workflows can be resumed without re-doing completed tasks.
 ---
 
+<p align="center">
+<img src="/assets/img/abacbs-t3ss.png" alt="af2split" width="400"/>
+</p>
+
 ## Binding partners
-- In the canonical Type III secretion system, is known to form direct interactions with SctD and SctQ.
-- Can we identify the SctD and SctQ genes in our target genome?
-- Let's view our [assembly](https://www.ncbi.nlm.nih.gov/nuccore/LN879502.1) on the NCBI website and search for genes annotated as SctD and SctK.
+- In the canonical Type III secretion system, **SctK** is known to form direct interactions with **SctD** and **SctQ**.
+- Can we identify the **SctD** and **SctQ** genes in our target genome?
+- Let's view our [assembly](https://www.ncbi.nlm.nih.gov/nuccore/LN879502.1) on the NCBI website and search for genes annotated as **SctD** and **SctK**.
 
 > ## SctD
 > 
@@ -70,10 +74,9 @@ keypoints:
 {: .solution}
 
 - Let's see if our uncharacterised protein is predicted to form a high confidence interaction with either of these potential partners.
-- We can create multi-entity FASTA files containing the proteins intended to be predicted as a complex.
 
 > ## NOTE
-> - To reduce the time required for prediction, we have trimmed the SctD and SctQ genes to the minimal region which would be expected to interact with a *bona fide* SctK gene.
+> - To reduce the time required for prediction, we have trimmed the **SctD** and **SctQ** genes to the minimal region which would be expected to interact with a *bona fide* **SctK** gene.
 {: .prereq}
 
 ## Construct samplesheet
@@ -121,11 +124,10 @@ pair1,fasta/SctD-complex.fasta
 
 > ## Note
 > - Normally, AlphaFold2 generates predictions using 5 copies of the model which all output different predictions. 
-> - In multimer mode, each of these 5 models is normally run with 5 independent replicates (5 x 5 = 25 total).
+> - In multimer mode, each of these 5 models is run with 5 independent replicates (5 x 5 = 25 total).
 > - All of these outputs are ranked by model confidence.
-> - Today, we are using a custom fork of AlphaFold2 which enables running only 1 of the 5 models.
-> - We also provide an additional argument to run only a single replicate.
-> - **These optimizations can reduce the GPU requirements by up to 25x for a small tradeoff in prediction quality**
+> - Today, we are using a custom fork (`alphafold2_pred-single.sif`) of AlphaFold2 which enables running only 1 of the 5 models.
+> - We also provide an additional argument to run only a single replicate (`-num_multimer_predictions_per_model=1`).
 >
 > ~~~
 > grep -A4 RUN_ALPHAFOLD2_PRED abacbs_profile-multimer.config
@@ -139,6 +141,9 @@ pair1,fasta/SctD-complex.fasta
 >     time = { 12.h }
 >}
 > ~~~
+>
+> - These optimizations can reduce the GPU requirements by **up to 25x** for a small tradeoff in prediction quality.
+>   - This could be important if we wish to scale to 1000s of predictions.
 >
 {: .prereq}
 
@@ -209,6 +214,6 @@ nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \
 
 ## 
 > ## Thought: 
-> Can we screen for potential interactions systematically?
+> - Can we screen for potential interactions systematically?
 {: .prereq}
 

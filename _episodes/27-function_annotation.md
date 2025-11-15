@@ -47,7 +47,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 
 ## SPfast 
 - [SPfast](https://colab.research.google.com/github/tlitfin/SPfast/blob/main/notebooks/SPfast_AFDB_clusters_PFAM.ipynb) is an alternative strategy for structure-based search and provides a minimal set of hits based on non-redundant PFAM clan annotations.
-- Upload our predicted PDB structure by leaving the input fields as blank.
+- Upload our predicted PDB structure by **leaving the input fields blank.** and pressing the **play button** of each cell in sequence.
 
 > ## Input form
 > {% raw %}
@@ -68,19 +68,22 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > | AF-A0A0U5EPG3-F1-model_v4   | Q8ZPP3     | 0.697 | 0.862          | IPR025292 | PF13327 | T3SS_LEE_assoc  | 1     |
 > {% endraw %}
 > 
-> - This collection of similar structures are annotated with PFAM clans relating to a Type III secretion system adaptor protein. [1]
-> - This suggests a related function for our uncharacterized gene.
-> - However, SctK is considered to be missing from Chlamydiota in recent reviews. [2]
+> - This collection of similar structures are annotated with PFAM clans which all relate to a Type III secretion system adaptor protein (SctK gene).
+> - This suggests a potential related function for our uncharacterized gene.
 {: .solution }
+
+> ## Careful
+> - Structural similarity does **NOT** guarantee a related function. 
+> - Shared structural scaffolds can sometimes adopt highly divergent functions.
+> - We can look for complementary evidence to support structure-based annotations.
+{: .discussion}
 
 ## Synteny
 
 
-Structure-based annotation is on the roadmap for another nf-core pipeline - [proteinannotator](https://nf-co.re/proteinannotator/dev/)
 
-> ## Careful
-> Structural similarity does not guarantee a related function. Shared structural scaffolds can sometimes adopt highly divergent functions.
-{: .discussion}
+
+Structure-based annotation is on the roadmap for another nf-core pipeline - [proteinannotator](https://nf-co.re/proteinannotator/dev/)
 
 ## References
 - [1] 

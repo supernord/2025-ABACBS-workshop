@@ -60,7 +60,7 @@ Today we’ll run a shortened Nextflow demo based on a [nextflow template](https
 
 Before beginning the exercise, navigate to the relevant working directory:
 
-```
+```bash
 cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise1/
 ls
 ```
@@ -73,7 +73,7 @@ git clone https://github.com/Sydney-Informatics-Hub/template-nf-demo
 
 Next, move into the cloned directory and look at the file structure
 
-```
+```bash
 cd template-nf-demo/
 tree
 ```
@@ -149,7 +149,7 @@ nextflow run main.nf --input assets/samplesheet.csv
 > tree work/
 > ```
 > output:
-> ```bash
+> ```
 > work/
 > ├── 56
 > │   └── 167e97ca7a4694c2b5e9d7deee6751
@@ -177,7 +177,7 @@ nextflow run main.nf --input assets/samplesheet.csv
 > tree results/
 > ```
 > output:
-> ```bash
+> ```
 > results/
 > ├── Illumina_summary.txt
 > ├── PacBio_summary.txt
@@ -197,6 +197,6 @@ nextflow run main.nf --input assets/samplesheet.csv
 > - **The `.nextflow.log` file** 
 > This directory contains a cache subdirectory to store cached data such as downloaded files and can be used to speed up subsequent pipeline runs. It also contains a history file which contains a record of pipeline executions including run time, the unique run name, and command line arguments used.
 >
-{: .solution }
+{: .prereq }
 
 Congratulations, you have run a nextflow pipeline on setonix!

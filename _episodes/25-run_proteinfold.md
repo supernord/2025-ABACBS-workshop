@@ -64,7 +64,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 {: .prereq}
 
 ### Job Accounting
-- From your **local terminal**, download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
+- After the workflow has completed, using your **local terminal**, download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
 
 ``` bash
 scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/pipeline_info/execution_timeline*.html ./
@@ -118,7 +118,7 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 ```
 
 ### Job Accounting
-- From your **local terminal**, download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
+- After the workflow has completed, using your **local terminal**, download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
 
 ``` bash
 scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output-split/pipeline_info/execution_timeline*.html ./
