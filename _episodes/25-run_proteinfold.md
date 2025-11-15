@@ -4,13 +4,10 @@ teaching: 5
 exercises: 10
 questions:
 objectives:
-- Locate the resources available to support running AlphaFold2 on Setonix.
-- Prepare a Nextflow configuration file to utilise available resources.
 - Run nfcore/proteinfold Nextflow workflow on Setonix.
+- Evaluate the cost of execution.
 keypoints:
-- Software designed for GPU execution is often compiled for Nvidia GPUS.
-- Custom images can be built to support execution using AMD GPUs
-- Workflows can be configured to use custom images
+- Running AlphaFold2 in split mode can significantly reduce SU consumption.
 ---
 
 ## Prepare samplesheet
@@ -19,7 +16,7 @@ We can prepare a nextflow samplesheet containing our protein input in fasta form
 
 ``` csv
 id,sequence
-prot1,fasta/PNK_0205.fasta
+sample0,fasta/PNK_0205.fasta
 ```
 
 ## Basic run
@@ -67,9 +64,17 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 {: .prereq}
 
 ### Job Accounting
-- Download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
+- From your **local terminal**, download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
+
+``` bash
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/pipeline_info/execution_timeline*.html ./
+```
+- **Windows users** can download from WinSCP.
+- From your file browser, open the `execution_timeline` to visualise outputs in your web browser.
 
 > ## Execution timeline
+> - Here is an example timeline from a full AlphaFold2 run for this target protein.
+> - Your execution time will be greatly reduced by using **dummy** miniature databases and generating only a single AlphaFold2 model output.
 > {% raw %}
 > <img src="/assets/img/abacbs-af2-timeline.png" alt="af2tl" width="1200"/>
 > {% endraw %}
@@ -88,7 +93,6 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > 
 > - A basic run of AlphaFold2 using the official implementation consumes 48 SUs on the Setonix system. 
 > - Compare this with the execution time for the demo run from this workshow using the miniature databases.
-> - **Conclusion: A large portion of the execution time is spent searching the sequence databases which does not require using a GPU.**
 >
 {: .solution}
 
@@ -99,6 +103,13 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 <img src="/assets/img/abacbs-af2-split.png" alt="af2split" width="800"/>
 </p>
 
+- Recall that AlphaFold2 relies on generating an MSA by searching large sequence databases.
+- This search process does not invoke the GPU which means that it is wasteful to request a GPU node until the MSA has been generated.
+- We can split AlphaFold2 in to a part that requires the **CPU** and a part that requires the **GPU**.
+- Nextflow can send jobs to the appropriate resource.
+
+Re-run proteinfold to predict the same protein but this time use AlphaFold2 in `"split_msa_prediction"` mode.
+
 ``` bash
 nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
     --outdir output-split/ --db /scratch/references/abacbs2025/databases/ \
@@ -107,9 +118,17 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 ```
 
 ### Job Accounting
-- Download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
+- From your **local terminal**, download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
+
+``` bash
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output-split/pipeline_info/execution_timeline*.html ./
+```
+- **Windows users** can download from WinSCP.
+- From your file browser, open the `execution_timeline` to visualise outputs in your web browser.
 
 > ## Execution timeline
+> - Here is an example timeline from a full AlphaFold2 run using `"split_msa_prediction` for this target protein.
+> - Your execution time will be greatly reduced by using **dummy** miniature databases and generating only a single AlphaFold2 model output.
 > {% raw %}
 > <img src="/assets/img/abacbs-af2split-timeline.png" alt="af2-splittl" width="1200"/>
 > {% endraw %}
@@ -144,5 +163,5 @@ nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
 > Standard:               48   SUs
 > Split MSA: 5.3 + 10.2 = 15.5 SUs
 > ~~~
-> **Running AlphaFold2 in split mode (whereby CPU-bound search is conducted on a CPU node) can significantly reduce SU consumption.**
+>
 {: .solution}

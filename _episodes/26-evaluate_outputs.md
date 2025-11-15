@@ -3,8 +3,6 @@ title: "Evaluate outputs of nf-core/proteinfold"
 teaching: 10
 exercises: 0
 questions: 
-    - Is this prediction of sufficient quality for downstream analysis?
-    - Is the MSA sufficiently deep for a high confidence novel prediction?
 objectives:
 keypoints:
     - Structure predictions should be interpreted in the context of model confidence.
@@ -73,7 +71,7 @@ tree output-split/ -L 4
 - Using your **local terminal**, download the `sample0_alphafold2_report.html` file from the `output-split/generate/` directory.
 
 ``` bash
-scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/sample0_alphafold2_report.html ./
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/generate/sample0_alphafold2_report.html ./
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the HTML report to visualise outputs in your web browser.
@@ -108,10 +106,9 @@ External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/on
 
 - Recall that high quality predictions of novel structures rely on co-evolution data derived from multiple sequence alignments.
 - There are several other outputs in the `examples/` directory. 
+        - flexible loops
+        - non-interacting
+        - shallow msa
 
-## Job accounting
-- The split MSA AlphaFold execution should now be completed.
-- You can download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
-- Compare this `execution_timeline` with the one 
 
 

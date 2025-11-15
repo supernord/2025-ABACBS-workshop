@@ -36,6 +36,7 @@ Specifically, we’ll:
 </p>
 
 ### References
-- https://www.nature.com/articles/s41586-023-06510-w 
+- https://www.nature.com/articles/s41586-023-06510-w this strategy has been used to generate hypotheses for a huge collection of pre-generated structures
+- This case study is from SPfast.
 
 

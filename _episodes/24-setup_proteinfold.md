@@ -149,5 +149,7 @@ databases/
 ```
 
 > ## Note
-> Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. These databases will **NOT** generate high-quality predictions for other protein targets. Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.
-{: .keypoints}
+> - Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. 
+> - These databases will **NOT** generate high-quality predictions for other protein targets. 
+> - Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.
+{: .discussion}

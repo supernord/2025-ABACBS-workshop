@@ -9,10 +9,18 @@ keypoints:
 - Similar structures can often share a similar function.
 ---
 
-## Download structure predictions
-- WinSCP/scp.
+> ## Note
+> - Much like traditional sequence-based annotation, we can take our AlphaFold2 predicted structure and search a large database of annotated structures.
+> - Similar annotated structures could provide a hypothesis about the likely function of our target protein.
+{: .prereq}
 
-- Much like traditional sequence-based annotation, we can take our predicted structure and look for similar annotated structures to provide a potential hypothesis about the likely function.
+## Download structure predictions
+- From your **local terminal**, download the `sample0_alphafold2.pdb` file located in the `output/alphafold2/standard/sample0/` directory.
+
+``` bash
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/alphafold2/standard/sample0/sample0_alphafold2.pdb ./
+```
+- **Windows users** can download from WinSCP.
 
 ## Foldseek
 
@@ -69,6 +77,10 @@ keypoints:
 
 
 Structure-based annotation is on the roadmap for another nf-core pipeline - [proteinannotator](https://nf-co.re/proteinannotator/dev/)
+
+> ## Careful
+> Structural similarity does not guarantee a related function. Shared structural scaffolds can sometimes adopt highly divergent functions.
+{: .discussion}
 
 ## References
 - [1] 
