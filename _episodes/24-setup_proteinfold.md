@@ -92,10 +92,10 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > quay.io-nf-core-proteinfold_alphafold2_msa-dev.img
 > ~~~
 >
-> - If you execute a Nextflow workflow that requires a container that is not located in the shared $NXF_SINGULARITY_LIBRARYDIR, the pipeline will attempt to pull the container from a hosted repository and store the image in your personal $NXF_SINGULARITY_CACHEDIR.
+> - If you execute a Nextflow workflow that requires a container that is not located in the shared `$NXF_SINGULARITY_LIBRARYDIR`, the pipeline will attempt to pull the container from a hosted repository and store the image in your personal `$NXF_SINGULARITY_CACHEDIR`.
 >
 > > ## **Why Environment Variables?**
-> > When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s work/ directory, which can be inefficient and waste storage if you run multiple workflows.
+> > When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s `work/` directory, which can be inefficient and waste storage if you run multiple workflows.
 > >
 > > Setting environment variables allows you to:
 > > - Cache container images in a shared location → Avoid repeated downloads and speed up execution.
@@ -134,7 +134,7 @@ withName: 'RUN_ALPHAFOLD2' {
 tree /scratch/references/abacbs2025/databases/
 ```
 
-You should see that alphafold databases are available here.
+You should see that the required AlphaFold2 databases and model parameters are available here.
 
 ```
 databases/
@@ -142,13 +142,11 @@ databases/
     ├── params
     ├── pdb70
     ├── pdb_mmcif
-    ├── **pdb_seqres**
+    ├── pdb_seqres
     ├── small_bfd
-    ├── **uniprot**
-    ├── uniref30
+    ├── uniprot
     └── uniref90 
 ```
-**TOM TODO: MULTIMER DBS**
 
 > ## Note
 > Today, we are using miniature versions of the databases to reduce execution time for the purpose of the workshop. These databases will **NOT** generate high-quality predictions for other protein targets. Full size databases are available at `/scratch/references/alphafold_feb2024/databases/`.

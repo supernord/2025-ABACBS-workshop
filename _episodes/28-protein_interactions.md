@@ -119,6 +119,30 @@ pair1,fasta/SctD-complex.fasta
 > ```
 {: .solution}
 
+> ## Note
+> - Normally, AlphaFold2 generates predictions using 5 copies of the model which all output different predictions. 
+> - In multimer mode, each of these 5 models is normally run with 5 independent replicates (5 x 5 = 25 total).
+> - All of these outputs are ranked by model confidence.
+> - Today, we are using a custom fork of AlphaFold2 which enables running only 1 of the 5 models.
+> - We also provide an additional argument to run only a single replicate.
+> - **These optimizations can reduce the GPU requirements by up to 25x for a small tradeoff in prediction quality**
+>
+> ~~~
+> grep -A4 RUN_ALPHAFOLD2_PRED abacbs_profile-multimer.config
+> ~~~
+> {: .source}
+>
+> ~~~
+> withName: 'RUN_ALPHAFOLD2_PRED' {
+>     container = '/scratch/references/abacbs2025/containers/alphafold2_pred-single.sif'
+>     ext.args = '--num_multimer_predictions_per_model=1'
+>     time = { 12.h }
+>}
+> ~~~
+>
+{: .prereq}
+
+
 ## Predict multimers
 
 ```bash
@@ -176,7 +200,15 @@ nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \
 
 - We can see that Nextflow keeps track of completed tasks and continues from the latest checkpoint.
 
-## Execution trace
+## Execution timeline
+<p align="center">
+<img src="/assets/img/abacbs-multimer-parallel.png" alt="pae" width="600"/>
+</p>
+- Observe in the full run that the 2 MSA jobs are executed in parallel.
+- Note that this will depend on the resources available when the workflow is being executed.
 
-Thought: Can we screen for potential interactions directly
+## 
+> ## Thought: 
+> Can we screen for potential interactions systematically?
+{: .prereq}
 

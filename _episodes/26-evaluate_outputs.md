@@ -59,13 +59,16 @@ tree output-split/ -L 4
 > ~~~
 {: .solution}
 
-
-- The workflow extracts ipTM, pTM and pLDDT scores in a model agnostic `tsv` format.
-
 > ## Bug
 > - There is currently a bug which causes the `PNK_0205.1` directory to be duplicated in the output.
 > - There are open issues ([#393](https://github.com/nf-core/proteinfold/issues/393), [#394](https://github.com/nf-core/proteinfold/issues/394)) on the repo aiming to resolve this bug (contributions welcome!)
 {: .discussion}
+
+> ## Primary outputs
+> - The workflow extracts `pAE`, `ipTM`, `pTM` and `pLDDT` scores in a model agnostic `tsv` format.
+> - The atomic coordinates of the structure prediction with the highest confidence can be found in the `sample0_alphafold2.pdb` file.
+> - Summary reporting information can be visualised in the `sample0_alphafold2_report.html` file.
+{: .prereq}
 
 - Using your **local terminal**, download the `sample0_alphafold2_report.html` file from the `output-split/generate/` directory.
 
@@ -75,7 +78,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 - **Windows users** can download from WinSCP.
 - From your file browser, open the HTML report to visualise outputs in your web browser.
 
-### Predicted local distance difference test (pLDDT)
+## Predicted local distance difference test (pLDDT)
 External resource: [EBI AlphaFold guide - pLDDT](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/plddt-understanding-local-confidence/)
 
 <p align="center">
@@ -90,14 +93,14 @@ External resource: [EBI AlphaFold guide - pLDDT](https://www.ebi.ac.uk/training/
 - Low pLDDT often coincides with regions of intrinsic disorder.
 
 
-### Predicted aligned error (PAE)
+## Predicted aligned error (pAE)
 External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/pae-a-measure-of-global-confidence-in-alphafold-predictions/)
 
 <p align="center">
 <img src="/assets/img/abacbs-pae.png" alt="pae" width="600"/>
 </p>
 
-### Sequence coverage
+## Sequence coverage
 
 <p align="center">
 <img src="/assets/img/abacbs-msa.png" alt="msa" width="800"/>
@@ -106,5 +109,9 @@ External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/on
 - Recall that high quality predictions of novel structures rely on co-evolution data derived from multiple sequence alignments.
 - There are several other outputs in the `examples/` directory. 
 
+## Job accounting
+- The split MSA AlphaFold execution should now be completed.
+- You can download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
+- Compare this `execution_timeline` with the one 
 
 
