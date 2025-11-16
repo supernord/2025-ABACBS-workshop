@@ -204,7 +204,7 @@ JOBID        USER ACCOUNT                   NAME EXEC_HOST ST     REASON START_T
 nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
     --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
-    -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 09ac089 -resume
+    -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 53a1008 -resume
 ~~~
 {: .source}
 
