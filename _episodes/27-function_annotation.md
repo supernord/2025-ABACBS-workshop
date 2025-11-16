@@ -146,8 +146,8 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > ~~~
 {: .solution}
 
-- PNK_0205 is between the SctL and SctJ genes which are also components of the T3SS machinery.
-- In genomes where it is annotated, SctK is overwhelmingly found between SctL and SctJ.
+- PNK_0205 is between the **SctL** and **SctJ** genes which are also components of the T3SS machinery.
+- In genomes where it is annotated, **SctK** is overwhelmingly found between **SctL** and **SctJ**.
 - The gene neighborhood of our uncharacterised gene is consistent with our protein structure based annotation.
 
 > ## Note:

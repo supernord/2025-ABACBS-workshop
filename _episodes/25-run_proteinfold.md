@@ -56,7 +56,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > ~~~
 > <br>
 > - Similarly, we can connect to the node that is executing the job to check the status (ie the node id under EXEC_HOST).
-> - Replace <node> with the id under EXEC_HOST (eg nid002166 from the example above)
+> - Replace <node> with the id under EXEC_HOST (eg nid002166 from the example above).
 >
 > ~~~
 > ssh <node>
@@ -82,7 +82,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > ====================================================================================================================
 > =============================================== End of ROCm SMI Log ================================================
 > ~~~
-> - We can monitor GPU utilization in the last column
+> - We can monitor GPU utilization in the last column.
 {: .prereq}
 
 ### Job Accounting
