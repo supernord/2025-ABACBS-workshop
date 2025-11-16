@@ -63,7 +63,7 @@ tree output/ -L 4
 - Using your **local terminal**, download the `sample0_alphafold2_report.html` file from the `output-split/generate/` directory.
 
 ``` bash
-scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/generate/sample0_alphafold2_report.html ./
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/output/generate/sample0_alphafold2_report.html ./
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the HTML report to visualise outputs in your web browser.
@@ -118,6 +118,18 @@ External resources:
 
 
 - There are several other outputs in the `examples/` directory. 
+- See what interpretations you can make about these output reports.
+
+> ## Example 1
+> - Using your **local terminal**, download the `example1_alphafold2_report.html` file from the `examples/` directory.
+> 
+> ~~~ bash
+> scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/examples/example1_alphafold2_report.html ./
+> ~~~
+> {: .source}
+> - **Windows users** can download from WinSCP.
+> - From your file browser, open the HTML report to visualise outputs in your web browser.
+{: .prereq}
 
 > ## Example 1
 > {% raw %}
@@ -131,6 +143,17 @@ External resources:
 > - The relative position of the two domains is uncertain
 > - The N-terminus is likely disordered
 {: .solution}
+
+> ## Example 2
+> - Using your **local terminal**, download the `example2_alphafold2_report.html` file from the `examples/` directory.
+> 
+> ~~~ bash
+> scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/examples/example2_alphafold2_report.html ./
+> ~~~
+> {: .source}
+> - **Windows users** can download from WinSCP.
+> - From your file browser, open the HTML report to visualise outputs in your web browser.
+{: .prereq}
 
 > ## Example 2
 > {% raw %}
