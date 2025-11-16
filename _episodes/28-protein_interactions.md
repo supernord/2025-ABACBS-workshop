@@ -235,7 +235,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/outpu
 > ## SctD
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-sctd-complex.png" alt="sctd-complex" width="600"/>
+> <img src="/assets/img/abacbs-sctd-complex.png" alt="sctd-complex" width="800"/>
 > </p>
 > {% endraw %}
 > - Our uncharacterised protein forms a high confidence interaction with SctD
@@ -244,7 +244,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/outpu
 > ## SctK
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-sctq-complex.png" alt="sctk-complex" width="600"/>
+> <img src="/assets/img/abacbs-sctq-complex.png" alt="sctk-complex" width="800"/>
 > </p>
 > {% endraw %}
 > - Our uncharacterised protein forms a high confidence interaction with SctQ

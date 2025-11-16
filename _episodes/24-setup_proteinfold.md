@@ -28,6 +28,7 @@ ls
 - You should see the following files which will be used in this exercise:
 
 ```
+abacbs_profile.config  examples  fasta  samplesheet.csv
 ```
 
 ## nf-core/proteinfold

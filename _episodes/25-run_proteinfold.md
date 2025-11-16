@@ -70,6 +70,19 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 > watch rocm-smi
 > ~~~
 > {: .source}
+>
+> output:
+> ~~~
+> ========================================= ROCm System Management Interface =========================================
+> =================================================== Concise Info ===================================================
+> Device  Node  IDs              Temp    Power  Partitions          SCLK    MCLK     Fan  Perf  PwrCap  VRAM%  GPU%
+> ^[3m              (DID,     GUID)  (Edge)  (Avg)  (Mem, Compute, ID)                                                   ^[0m
+> ====================================================================================================================
+> 0       11    0x7408,   49174  35.0°C  N/A    N/A, N/A, 0         800Mhz  1600Mhz  0%   auto  0.0W    74%    0%
+> ====================================================================================================================
+> =============================================== End of ROCm SMI Log ================================================
+> ~~~
+> - We can monitor GPU utilization in the last column
 {: .prereq}
 
 ### Job Accounting
