@@ -34,16 +34,101 @@ abacbs_profile.config  examples  fasta  samplesheet.csv
 ## nf-core/proteinfold
 - [proteinfold](https://github.com/nf-core/proteinfold/tree/dev) is a Nextflow pipeline designed to support numerous models for molecular structure prediction.
 - Today, we will use proteinfold to predict the structure of our uncharacterised protein using the AlphaFold2 model.
-- We will use a development branch (commit: 09ac089) to access some of the latest features that are not yet available in the current release.
+- We will use a development branch (commit: 53a1008) to access some of the latest features that are not yet available in the current release.
 
 ```bash
 #module load nextflow/25.04.6 # This should still be loaded from the previous exercise
-nextflow pull nf-core/proteinfold
+nextflow pull nf-core/proteinfold -r 53a1008
 ```
 
 ```bash
-tree ~/.nextflow/assets/nf-core/proteinfold/
+tree $NXF_HOME/assets/nf-core/proteinfold/ -L 2 --filelimit=20
 ```
+
+> ## Result
+> ~~~
+> ├── assets
+> │   ├── adaptivecard.json
+> │   ├── comparison_template.html
+> │   ├── dummy_db
+> │   ├── dummy_db_dir
+> │   ├── email_template.html
+> │   ├── email_template.txt
+> │   ├── methods_description_template.yml
+> │   ├── multiqc_config.yml
+> │   ├── nf-core-proteinfold_logo_light.png
+> │   ├── NO_FILE
+> │   ├── NO_FILE_PAE
+> │   ├── report_template.html
+> │   ├── samplesheet.csv
+> │   ├── schema_input.json
+> │   ├── sendmail_template.txt
+> │   └── slackreport.json
+> ├── bin
+> │   ├── extract_metrics.py
+> │   ├── fasta_to_alphafold3_json.py
+> │   ├── fix_obsolete.py
+> │   ├── generate_comparison_report.py
+> │   ├── generate_report.py
+> │   ├── mmcif_to_pdb.py
+> │   ├── msa_manager.py
+> │   ├── __pycache__
+> │   └── utils.py
+> ├── CHANGELOG.md
+> ├── CITATIONS.md
+> ├── CODE_OF_CONDUCT.md
+> ├── conf [32 entries exceeds filelimit, not opening dir]
+> ├── docs
+> │   ├── images
+> │   ├── output.md
+> │   ├── README.md
+> │   └── usage.md
+> ├── LICENSE
+> ├── main.nf
+> ├── modules
+> │   ├── local
+> │   └── nf-core
+> ├── modules.json
+> ├── nextflow.config
+> ├── nextflow_schema.json
+> ├── nf-test.config
+> ├── README.md
+> ├── ro-crate-metadata.json
+> ├── subworkflows
+> │   ├── local
+> │   └── nf-core
+> ├── tests
+> │   ├── alphafold2_download.nf.test
+> │   ├── alphafold2_download.nf.test.snap
+> │   ├── alphafold2_split.nf.test
+> │   ├── alphafold2_split.nf.test.snap
+> │   ├── alphafold3.nf.test
+> │   ├── alphafold3.nf.test.snap
+> │   ├── colabfold_download.nf.test
+> │   ├── colabfold_download.nf.test.snap
+> │   ├── colabfold_local.nf.test
+> │   ├── colabfold_local.nf.test.snap
+> │   ├── colabfold_webserver.nf.test
+> │   ├── colabfold_webserver.nf.test.snap
+> │   ├── default.nf.test
+> │   ├── default.nf.test.snap
+> │   ├── esmfold.nf.test
+> │   ├── esmfold.nf.test.snap
+> │   ├── nextflow.config
+> │   ├── split_fasta.nf.test
+> │   └── split_fasta.nf.test.snap
+> ├── tower.yml
+> └── workflows
+>     ├── alphafold2.nf
+>     ├── alphafold3.nf
+>     ├── boltz.nf
+>     ├── colabfold.nf
+>     ├── esmfold.nf
+>     ├── helixfold3.nf
+>     └── rosettafold_all_atom.nf
+> ~~~
+{: .solution}
+
 
 > ## Setup environment
 > - The previous exercise didn’t use containers, but they are one of the most effective ways to manage software in workflow development, especially with Nextflow.

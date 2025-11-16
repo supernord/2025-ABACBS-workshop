@@ -86,7 +86,9 @@ External resource: [EBI AlphaFold guide - pLDDT](https://www.ebi.ac.uk/training/
 {: .prereq}
 
 ## Predicted aligned error (pAE)
-External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/pae-a-measure-of-global-confidence-in-alphafold-predictions/)
+External resources: 
+- [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/pae-a-measure-of-global-confidence-in-alphafold-predictions/)
+- [EBI AlphaFold guide - confidence](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/confidence-scores-in-alphafold-multimer/)
 
 <p align="center">
 <img src="/assets/img/abacbs-pae.png" alt="pae" width="600"/>
@@ -98,6 +100,7 @@ External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/on
 > - Each row of the pAE matrix (i,j) represents the pAE of residues (j) assuming that the structures are superimposed based on residue (i).
 > - A low pAE is indicated by a dark green color and is often interpreted as high confidence about the relative positions of the 2 residues.
 > - `pTM` is a score calculated from the best row of the pAE matrix and represents an overall quality score.
+> - `ipTM` is the same score but only considering PAE between different chains.
 > - **Conclusion:** Our target structure has been predicted with high confidence.
 {: .prereq}
 
@@ -115,9 +118,30 @@ External resource: [EBI AlphaFold guide - PAE](https://www.ebi.ac.uk/training/on
 
 
 - There are several other outputs in the `examples/` directory. 
-        - flexible loops
-        - non-interacting
-        - shallow msa
+
+> ## Example 1
+> {% raw %}
+> <p align="center">
+> <img src="/assets/img/abacbs-report-example1.png" alt="ex1" width="800"/>
+> </p>       
+> {% endraw %}
+> 
+> **Interpretation:**
+> - This protein contains 2 domains that are confidently predicted.
+> - The relative position of the two domains is uncertain
+> - The N-terminus is likely disordered
+{: .solution}
+
+> ## Example 2
+> {% raw %}
+> <p align="center">
+> <img src="/assets/img/abacbs-report-example2.png" alt="ex2" width="800"/>
+> </p>       
+> {% endraw %}
+> 
+> **Interpretation:**
+> - The N-terminal domain is predicted with low confidence - likely due to low MSA coverage.
+{: .solution}
 
 
 

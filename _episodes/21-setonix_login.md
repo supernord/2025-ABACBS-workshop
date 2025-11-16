@@ -64,7 +64,7 @@ There are some materials for the lessons which are hosted on github. In order to
 ```bash
 cd $MYSCRATCH
 git clone https://github.com/tlitfin/2025-ABACBS-workshop
-cd 2025-ABACBS-workshop
+cd 2025-ABACBS-workshop/exercises/
 ls
 ```
 

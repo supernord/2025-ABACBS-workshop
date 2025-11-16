@@ -160,12 +160,13 @@ pair2,fasta/SctQ-complex.fasta
 
 ## Predict multimers
 
-```bash
+~~~ bash
 nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
     --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
     -c abacbs_profile-multimer.config --slurm_account $PAWSEY_PROJECT -r 53a1008
-```
+~~~
+{: .source}
 
 - Nextflow can automatically distribute work across the available compute resources.
 - In our second terminal, check the status of the queue.
@@ -199,12 +200,13 @@ JOBID        USER ACCOUNT                   NAME EXEC_HOST ST     REASON START_T
 
 - Re-start our multimer predictions using the original command in combination with the `-resume` parameter.
 
-``` bash
+~~~ bash
 nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
     --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
     -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 09ac089 -resume
-```
+~~~
+{: .source}
 
 ```
 [54/a90051] NFC…ALPHAFOLD2:RUN_ALPHAFOLD2_MSA (pair1) | 2 of 2, cached: 2 ✔
