@@ -39,11 +39,11 @@ User name is the name you selected on the training accounts sheet e.g. something
 
 Helpful link: [https://www.hostinger.com/tutorials/how-to-use-putty-ssh](https://www.hostinger.com/tutorials/how-to-use-putty-ssh)
 
-> ## Important
-> - **Login with two separate terminals now.**
->   - **One will be used to execute workflows.**
->   - **The other will be used to browse outputs and monitor jobs.** 
-> - **Keep an additional local terminal for downloading result files**
+> ## **Important**
+> - Login to Setonix with two separate terminals now.
+>   - One will be used to execute workflows.
+>   - The other will be used to browse outputs and monitor jobs.
+> - Keep an additional local terminal for downloading result files.
 {: .prereq}
 
 ### Useful shortcuts that Pawsey sets up for you

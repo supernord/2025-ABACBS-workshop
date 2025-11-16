@@ -21,7 +21,7 @@ keypoints:
 - Before commencing the exercise, navigate to the relevant working directory
 
 ```bash
-cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise2/
+cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise3/
 ls
 ```
 

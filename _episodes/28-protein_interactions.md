@@ -81,6 +81,13 @@ keypoints:
 
 ## Construct samplesheet
 
+- Navigate to the new working directory for this exercise
+
+```bash
+cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise4/
+ls
+```
+
 - Check that the FASTA files for the two target complexes are available in the `fasta/` directory.
 
 ```bash
@@ -134,7 +141,7 @@ pair1,fasta/SctD-complex.fasta
 > - In multimer mode, each of these 5 models is run with 5 independent replicates (5 x 5 = 25 total).
 > - All of these outputs are ranked by model confidence.
 > - Today, we are using a custom fork (`alphafold2_pred-single.sif`) of AlphaFold2 which enables running only 1 of the 5 models.
-> - We also provide an additional argument to run only a single replicate (`-num_multimer_predictions_per_model=1`).
+> - We also provide an additional argument to run only a single replicate of this model (`-num_multimer_predictions_per_model=1`).
 >
 > ~~~
 > grep -A4 RUN_ALPHAFOLD2_PRED abacbs_profile-multimer.config

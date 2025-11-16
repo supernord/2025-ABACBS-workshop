@@ -1,7 +1,7 @@
 ---
 title: "EXTRA: Optimized MSA generation"
-teaching: 5
-exercises: 5
+teaching: 
+exercises: 
 questions:
 objectives:
 keypoints:

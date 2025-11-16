@@ -1,7 +1,7 @@
 ---
 title: "EXTRA: Executing at scale"
-teaching: 5
-exercises: 5
+teaching: 
+exercises: 
 questions:
 objectives:
 keypoints:

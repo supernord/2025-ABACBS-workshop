@@ -49,7 +49,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 {: .solution }
 
 > ## Note 
-> - This example is an intentionally difficult case for Foldseek. 
+> - This example was selected as a difficult case for Foldseek. 
 > - Many structures will retrieve excellent results using Foldseek.
 {: .prereq}
 
