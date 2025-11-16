@@ -12,7 +12,9 @@ keypoints:
 ---
 
 > ## Disclaimer
->  Nextflow is a powerful and feature-rich workflow management system that cannot be fully covered in a short session. In this overview, we’ll focus on key concepts and practical examples. For deeper learning, please refer to the official [Nextflow documentation](http://nextflow.io/docs/latest/) and [training](https://training.nextflow.io/latest/).
+> - Nextflow is a powerful and feature-rich workflow management system that cannot be fully covered in a short session. 
+> - In this overview, we’ll focus on key concepts and practical examples. 
+> - For deeper learning, please refer to the official [Nextflow documentation](http://nextflow.io/docs/latest/) and [training](https://training.nextflow.io/latest/).
 {: .keypoints}
 
 

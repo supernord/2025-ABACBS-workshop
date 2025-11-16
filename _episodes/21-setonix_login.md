@@ -63,14 +63,13 @@ There are some materials for the lessons which are hosted on github. In order to
 
 ```bash
 cd $MYSCRATCH
-git clone https://github.com/SarahBeecroft/Intro2HPC.git
-cd Intro2HPC/exercises
+git clone https://github.com/tlitfin/2025-ABACBS-workshop
+cd 2025-ABACBS-workshop
 ls
 ```
 
 If you've successfully cloned the git repo, the `ls` command will return the following:
 
-```bash
-_config.yml      _episodes_rmd    _includes        aio.md           AUTHORS          CITATION         CONDUCT.md       exercises        favicon-lc.ico   index.md         Makefile         reference.md     setup
-_episodes        _extras          _layouts         assets           bin              code             CONTRIBUTING.md  favicon-dc.ico   favicon-swc.ico  LICENSE.md       README.md        requirements.txt setup.md
+```
+exercise1  exercise2  exercise3  exercise4
 ```

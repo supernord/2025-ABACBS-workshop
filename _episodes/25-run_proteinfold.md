@@ -1,13 +1,14 @@
 ---
 title: "Run nf-core/proteinfold on Setonix"
 teaching: 5
-exercises: 10
+exercises: 15
 questions:
 objectives:
 - Run nfcore/proteinfold Nextflow workflow on Setonix.
 - Monitor resource allocation and utilisation.
 - Evaluate the cost of execution.
 keypoints:
+- Nextflow can be used to orcestrate AlphaFold2 executions.
 - We can monitor reource utilisation by connecting to a worker node.
 - Running AlphaFold2 in split mode can significantly reduce SU consumption.
 ---
@@ -38,7 +39,7 @@ sample0,fasta/PNK_0205.fasta
 nextflow run nf-core/proteinfold/ --input samplesheet.csv \
     --outdir output/ --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --use_gpu --alphafold2_mode "standard" \
-    -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT -r 09ac089
+    -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT -r 53a1008
 ```
 
 > ## Job monitoring
@@ -75,7 +76,7 @@ nextflow run nf-core/proteinfold/ --input samplesheet.csv \
 - After the workflow has completed, using your **local terminal**, download the `execution_timeline` HTML file located in the `output/pipeline_info/` directory.
 
 ``` bash
-scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/pipeline_info/execution_timeline*.html ./
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/output/pipeline_info/execution_timeline*.html ./
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the `execution_timeline` to visualise outputs in your web browser.
@@ -89,7 +90,9 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 {: .solution }
 
 > ## Service units
-> - We can use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the service unit (SU) cost of our workflow execution.
+> - All Pawsey users are allocated service units (SU) which are consumed by running jobs on Setonix.
+> - The SU cost of each job is determined based on the requested resources.
+> - We can use the Pawsey [calculator](https://pawseysc.github.io/su-calculator/) to estimate the SU cost of our workflow execution.
 > - A full scale execution was completed in 0.75 hours using a single GPU (neglible CPU time).
 >
 > ~~~
@@ -122,14 +125,14 @@ Re-run proteinfold to predict the same protein but this time use AlphaFold2 in `
 nextflow run ../workflow/proteinfold/ --input samplesheet.csv \
     --outdir output-split/ --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --use_gpu --alphafold2_mode "split_msa_prediction" \
-    -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT
+    -c abacbs_profile.config --slurm_account $PAWSEY_PROJECT -r 53a1008
 ```
 
 ### Job Accounting
 - After the workflow has completed, using your **local terminal**, download the `execution_timeline` HTML file located in the `output-split/pipeline_info/` directory.
 
 ``` bash
-scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output-split/pipeline_info/execution_timeline*.html ./
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/output-split/pipeline_info/execution_timeline*.html ./
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the `execution_timeline` to visualise outputs in your web browser.
@@ -151,11 +154,11 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > **CPU**
 > ~~~
 > SUs = Partition Charge Rate × Max Proportion × Nodes × Hours
-> 128 × 0.1391 × 1 × 0.3 = 5.343 SUs
+> 128 × 0.0696 × 1 × 0.3 = 2.672 SUs
 >
 > Core Proportion: 8 cores / 128 total cores = 0.0625
-> Memory Proportion: 32 GB / 230 GB total for accounting = 0.1391
-> Max Proportion (Memory): 0.1391
+> Memory Proportion: 16 GB / 230 GB total for accounting = 0.0696
+> Max Proportion (Memory): 0.0696
 > ~~~
 > <br>
 > **GPU**
@@ -169,7 +172,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 >
 > ~~~
 > Standard:               48   SUs
-> Split MSA: 5.3 + 10.2 = 15.5 SUs
+> Split MSA: 2.7 + 10.2 = 12.9 SUs
 > ~~~
 >
 {: .solution}

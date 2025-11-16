@@ -52,7 +52,7 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > module load singularity/4.1.0-slurm
 > ```
 > <br>
-> > ## **Why containers?**
+> > ## **Background:** Why containers?
 > >
 > > A container is a lightweight, portable environment that bundles an application together with everything it needs to run such as libraries, dependencies, and system tools. It is a simple and reliable alternative to installing software directly on your system or HPC environment (which often requires managing dependencies manually).
 > > On HPC systems, this means isolation from other environments, reproducibility across platforms, and simplified maintenance without manual installs or dependency troubleshooting. 
@@ -81,8 +81,8 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > {: .source}
 > output:
 > ~~~
-> alphafold2_pred.sif
-> alphafold2.sif
+> alphafold2_pred-single.sif
+> alphafold2-single.sif
 > boltz2_v2.0.3.sif
 > community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-24-241f0746484727a3633f544c3747bfb77932e1c8c252e769640bd163232d9112-data.img
 > community-cr-prod.seqera.io-docker-registry-v2-blobs-sha256-ef-eff0eafe78d5f3b65a6639265a16b89fdca88d06d18894f90fcdb50142004329-data.img
@@ -94,7 +94,7 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 >
 > - If you execute a Nextflow workflow that requires a container that is not located in the shared `$NXF_SINGULARITY_LIBRARYDIR`, the pipeline will attempt to pull the container from a hosted repository and store the image in your personal `$NXF_SINGULARITY_CACHEDIR`.
 >
-> > ## **Why Environment Variables?**
+> > ## **Background:** Why Environment Variables?
 > > When using containers on HPC systems, Nextflow needs to know where to store and retrieve container images. By default, it downloads containers into the workflow’s `work/` directory, which can be inefficient and waste storage if you run multiple workflows.
 > >
 > > Setting environment variables allows you to:
@@ -113,21 +113,28 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 - Pre-built images have been provided for the workshop today at `/scratch/references/abacbs2025/containers`. 
 - We can configure the workflow to use these non-standard images by defining their path in a custom Nextflow config.
 
-Open the `abacbs_workshop.config` file to confirm that the workflow modules are configured to use non-standard images available on Setonix.
+> ## Note
+> - Normally AlphaFold2 runs 5 different models and picks the best result.
+> - Today we are using a modified version of AlphaFold2 that only runs a single model to reduce execution time.
+{: .prereq}
 
+Check the `abacbs_workshop.config` file to confirm that the workflow modules are configured to use non-standard images available on Setonix.
+
+```bash
+grep -w RUN_ALPHAFOLD2 abacbs_profile.config -A3
+```
+
+output:
 ```
 withName: 'RUN_ALPHAFOLD2' {
-    container = '/scratch/references/abacbs2025/containers/alphafold2.sif'
+    container = '/scratch/references/abacbs2025/containers/alphafold2-single.sif'
     time = { 12.h }
-    cpus = 8
-    memory = 32.GB
 }
 ```
 
 ## Reference data
 - Recall that structure prediction relies on collecting homologous proteins in a multiple sequence alignment (MSA) to identify coevolutionary information.
 - These homologs are identified from enormous reference sequence databases (>1TB).
-- Searching these large databases can be a performance bottleneck. 
 - Check that these databases are available on Setonix.
 
 ```bash
@@ -139,7 +146,6 @@ You should see that the required AlphaFold2 databases and model parameters are a
 ```
 databases/
     ├── mgnify
-    ├── params
     ├── pdb70
     ├── pdb_mmcif
     ├── pdb_seqres

@@ -85,7 +85,6 @@ keypoints:
 
 ```bash
 cd $MYSCRATCH/2025-ABACBS-workshop/exercises/exercise4/
-ls
 ```
 
 - Check that the FASTA files for the two target complexes are available in the `fasta/` directory.
@@ -114,7 +113,7 @@ MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRSTDLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLV
 WADLSSRLARSFDREGFSIQPKDIMWRTTDQLYDGLGDSPFPLIFAVPILKGDVCWVMPEQEMVLLETWLLTKESHPISFQDRALSESFYRFFALEVLYHLSQTSFDKSIAPILTNKTVLPQEDALCLDISLSMHDQTLWGRLIISPDLRHSWVEHYASHGPSPL
 ```
 
-- Confirm that the samplesheet in the working directory points to the FASTA file for the first complex to be predicted.
+- Confirm that the samplesheet in the working directory points to the FASTA files containing the proteins we want to predict.
 
 ```bash
 cat samplesheet.csv
@@ -124,17 +123,8 @@ output:
 ``` csv
 id,sequence
 pair1,fasta/SctD-complex.fasta
+pair2,fasta/SctQ-complex.fasta
 ```
-
-- Edit the samplesheet to add a second row which points to the second FASTA file.
-
-> ## Check
-> ``` csv
-> id,sequence
-> pair1,fasta/SctD-complex.fasta
-> pair2,fasta/SctQ-complex.fasta
-> ```
-{: .solution}
 
 > ## Note
 > - Normally, AlphaFold2 generates predictions using 5 copies of the model which all output different predictions. 
@@ -169,7 +159,7 @@ pair1,fasta/SctD-complex.fasta
 nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \ 
     --db /scratch/references/abacbs2025/databases/ \
     --mode alphafold2 --alphafold2_model_preset multimer --use_gpu \
-    -c abacbs_profile-multimer.config --slurm_account pawsey1017 -r 09ac089
+    -c abacbs_profile-multimer.config --slurm_account $PAWSEY_PROJECT -r 53a1008
 ```
 
 - Nextflow can automatically distribute work across the available compute resources.
@@ -232,7 +222,7 @@ nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \
 - Using your **local terminal**, download the `pair1_alphafold2_report.html` and `pair1_alphafold2_report.html` files from the `output-multimer/generate/` directory.
 
 ``` bash
-scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/generate/pair*_alphafold2_report.html ./
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/output/generate/pair*_alphafold2_report.html ./
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the HTML reports to visualise outputs in your web browser.
