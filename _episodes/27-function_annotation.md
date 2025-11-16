@@ -79,7 +79,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > | sample0_alphafold2          | Q8ZPP3     | 0.697 | 0.862          | IPR025292 | PF13327 | T3SS_LEE_assoc  | 1     |
 > {% endraw %}
 > 
-> - This collection of similar structures are annotated with PFAM clans which all relate to a Type III secretion system adaptor protein (SctK gene).
+> - This collection of similar structures are annotated with PFAM clans (FliG, YscK, OrgA_MxiK, HrpB4, T3SS_LEE_assoc) which all relate to a Type III secretion system (T3SS) adaptor protein (SctK gene).
 > - This suggests a potential related function for our uncharacterized gene.
 {: .solution }
 
@@ -90,10 +90,65 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 {: .discussion}
 
 ## Synteny
+- T3SS genes are often found in operons.
+- Return to our original [assembly](https://www.ncbi.nlm.nih.gov/nuccore/LN879502.1) and look at the gene neighbors of our target locus (PNK_0205).
 
+> ## Gene Neighborhood
+> ~~~
+> gene            complement(256361..257014)
+>                 /gene="sctL"
+>                 /locus_tag="PNK_0204"
+> CDS             complement(256361..257014)
+>                 /gene="sctL"
+>                 /locus_tag="PNK_0204"
+>                 /function="Flagellar biosynthesis/type III secretory
+>                 pathway protein"
+>                 /codon_start=1
+>                 /transl_table=11
+>                 /product="putative type III secretion protein SctL"
+>                 /protein_id="CUI15842.1"
+>                 /translation="MSKKFFSLIYGDQIHTAPETKVIPADSFSVLQDASQVLELIKQD
+>                 AEKYRMQVVKESEQLKEHAEKEGYEEGFKKWAEHLVNLEKEIEKVHQELQQLVIPVAL
+>                 KAAKKIVGKEIELSEDVIVDIVASNLKAVAQHKKVTIFVNKKDLDVLDKNKPRLRDLF
+>                 ESLESLSIRPRDDVASGGCIIETEIGIINAQLEHRWRVLEKAFEGLVKTSPEPEKGS"
+> gene            complement(257017..257859)
+>                 /locus_tag="PNK_0205"
+> CDS             complement(257017..257859)
+>                 /locus_tag="PNK_0205"
+>                 /codon_start=1
+>                 /transl_table=11
+>                 /product="conserved hypothetical protein"
+>                 /protein_id="CUI15843.1"
+>                 /translation="MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRST
+>                 DLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLVMAALTQEQISGLNPVIAPSTLS
+>                 NPVKTFIINQLYTLLKADEHLPYDYLPETDLSPLGTWSKARLTELIDFLGLHDLASEM
+>                 RHIVDKNQLKNIYTSLSSKQFYYLKVCLHQKEILSVPKLGIDPSKRDSTKLKRIVHRR
+>                 GLLRLGKALCGQHPDFVWYLAHTLDTGRGKLILNAYQPESVPQVTSFLKGQVLNLMNF
+>                 LKSE"
+> gene            complement(257888..258895)
+>                 /gene="sctJ"
+>                 /locus_tag="PNK_0206"
+> CDS             complement(257888..258895)
+>                 /gene="sctJ"
+>                 /locus_tag="PNK_0206"
+>                 /function="Type III secretory pathway, lipoprotein EscJ"
+>                 /codon_start=1
+>                 /transl_table=11
+>                 /product="type III secretion lipoprotein SctJ"
+>                 /protein_id="CUI15844.1"
+>                 /translation="MKINCVAARTSIYRFLHQLMVFITLVSVLTSCESRRVIVNGLEE
+>                 KEANEILVFLSTKGINATKVQAATEGGGGGKGILWNISVEETQANEAMALLNQVGLPR
+>                 RRGQNLLGIFANTSLVPSGMQEKIRYQAGLAEQIASTIRKIDGVLDADVQISFPDEDP
+>                 LNPNAPKQKITASVYVKHNGVLDDPNAHLTTRIKRLVSGSVNGLDYDNVTVIGDKARY
+>                 GETPLGGLGGSLGDEEKQYVNVWSIVLAKDSLSRFRIIFFAFTISLVLLLLALIWLLW
+>                 KFLPLLKKVGGFKQLLSFHPIQLGDIATEAKAPEATDAKKEEKAKKSEDDTANQGIDE
+>                 T"
+> ~~~
+{: .solution}
 
-
-
+- PNK_0205 is between the SctL and SctJ genes which are also components of the T3SS machinery.
+- In genomes where it is annotated, SctK is overwhelmingly found between SctL and SctJ.
+- The gene neighborhood of our uncharacterised gene is consistent with our protein structure based annotation.
 
 > ## Note:
 > Structure-based annotation is on the roadmap for another nf-core pipeline - [proteinannotator](https://nf-co.re/proteinannotator/dev/)

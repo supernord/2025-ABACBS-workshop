@@ -4,6 +4,9 @@ teaching: 5
 exercises: 10
 questions:
 objectives:
+    - Predict a multimeric complex with AlphaFold2.
+    - Run multiple predictions in parallel.
+    - Check that predicted interactions are consistent with our functional annotation.
 keypoints:
     - Nextflow will distribute work over available resources.
     - Workflows can be resumed without re-doing completed tasks.
@@ -12,6 +15,8 @@ keypoints:
 <p align="center">
 <img src="/assets/img/abacbs-t3ss.png" alt="af2split" width="400"/>
 </p>
+
+**Available from:** *Samuel Wagner, Iwan Grin, Silke Malmsheimer, Nidhi Singh, Claudia E Torres-Vargas, Sibel Westerhausen, Bacterial type III secretion systems: a complex device for the delivery of bacterial effector proteins into eukaryotic host cells, FEMS Microbiology Letters, Volume 365, Issue 19, October 2018, fny201,*
 
 ## Binding partners
 - In the canonical Type III secretion system, **SctK** is known to form direct interactions with **SctD** and **SctQ**.
@@ -226,6 +231,24 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/outpu
 ```
 - **Windows users** can download from WinSCP.
 - From your file browser, open the HTML reports to visualise outputs in your web browser.
+
+> ## SctD
+> {% raw %}
+> <p align="center">
+> <img src="/assets/img/abacbs-sctd-complex.png" alt="sctd-complex" width="600"/>
+> </p>
+> {% endraw %}
+> - Our uncharacterised protein forms a high confidence interaction with SctD
+{: .solution}
+
+> ## SctK
+> {% raw %}
+> <p align="center">
+> <img src="/assets/img/abacbs-sctq-complex.png" alt="sctk-complex" width="600"/>
+> </p>
+> {% endraw %}
+> - Our uncharacterised protein forms a high confidence interaction with SctQ
+{: .solution}
 
 
 > ## Thought: 
