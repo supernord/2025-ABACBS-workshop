@@ -1,4 +1,4 @@
 # Readme
-https://sarahbeecroft.github.io/Intro2HPC
+https://tlitfin.github.io/2025-ABACBS-workshop
 
-see also https://sarahbeecroft.github.io/intermediateHPC
+Adapted from: https://sarahbeecroft.github.io/Intro2HPC
