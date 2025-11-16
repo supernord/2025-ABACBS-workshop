@@ -3,10 +3,11 @@ title: "Using structures to annotate function"
 teaching: 5
 exercises: 5
 questions:
- - What is the function of this protein?
 objectives:
+- Learn about services (Foldseek and SPfast) for searching large structure databases.
 keypoints:
 - Similar structures can often share a similar function.
+- Structure-based annotation should be supported by complementary evidence.
 ---
 
 > ## Note
@@ -33,6 +34,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > <img src="/assets/img/abacbs-fseek.png" alt="foldseek" width="800"/>
 > </p>
 > {% endraw %}
+> - Ensure that the check-boxes for all databases are selected.
 {: .keypoints}
 
 > ## Results
@@ -40,10 +42,16 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > <img src="/assets/img/abacbs-fseek-res.png" alt="fseek-res" width="1200"/>
 > {% endraw %}
 > 
-> - This collection of similar structures are annotated with PFAM clans relating to a Type III secretion system adaptor protein. [1]
-> - This suggests a related function for our uncharacterized gene.
-> - However, SctK is considered to be missing from Chlamydiota in recent reviews. [2]
+> - Browse the tabs to see the top hits in various protein structure databases.
+> - The most similar proteins in AFDB50 are also uncharacterised proteins.
+> - There are some hits to proteins with various annotations (MgtE, FliG, F-box)
+>
 {: .solution }
+
+> ## Note 
+> - This example is an intentionally difficult case for Foldseek. 
+> - Many structures will retrieve excellent results using Foldseek.
+{: .prereq}
 
 ## SPfast 
 - [SPfast](https://colab.research.google.com/github/tlitfin/SPfast/blob/main/notebooks/SPfast_AFDB_clusters_PFAM.ipynb) is an alternative strategy for structure-based search and provides a minimal set of hits based on non-redundant PFAM clan annotations.

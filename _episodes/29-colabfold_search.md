@@ -1,5 +1,5 @@
 ---
-title: "Optimized MSA generation"
+title: "EXTRA: Optimized MSA generation"
 teaching: 5
 exercises: 5
 questions:

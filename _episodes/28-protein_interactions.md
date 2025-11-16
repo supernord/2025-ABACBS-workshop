@@ -1,7 +1,7 @@
 ---
 title: "Multimer structure prediction"
 teaching: 5
-exercises: 5
+exercises: 10
 questions:
 objectives:
 keypoints:
@@ -87,6 +87,7 @@ keypoints:
 cat fasta/SctD-complex.fasta
 ```
 
+output:
 ```
 > PNK_0205
 MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRSTDLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLVMAALTQEQISGLNPVIAPSTLSNPVKTFIINQLYTLLKADEHLPYDYLPETDLSPLGTWSKARLTELIDFLGLHDLASEMRHIVDKNQLKNIYTSLSSKQFYYLKVCLHQKEILSVPKLGIDPSKRDSTKLKRIVHRRGLLRLGKALCGQHPDFVWYLAHTLDTGRGKLILNAYQPESVPQVTSFLKGQVLNLMNFLKSE
@@ -98,6 +99,7 @@ IAETGRWLLKVIGGPNNGAEFYMQAGHSYILGTDPHSCDIVFQDTSVSRQHAKIIVSPEDSLAIEDLKSRNGVLVSGAPV
 cat fasta/SctQ-complex.fasta
 ```
 
+output:
 ```
 > PNK_0205
 MDKRGWMMLRVFINCYNPKAGEALLKFLPQEEVQAVLSQDIRSTDLTPILYQPQKLLERMHYSWIEPLLGGFPEKLHPLVMAALTQEQISGLNPVIAPSTLSNPVKTFIINQLYTLLKADEHLPYDYLPETDLSPLGTWSKARLTELIDFLGLHDLASEMRHIVDKNQLKNIYTSLSSKQFYYLKVCLHQKEILSVPKLGIDPSKRDSTKLKRIVHRRGLLRLGKALCGQHPDFVWYLAHTLDTGRGKLILNAYQPESVPQVTSFLKGQVLNLMNFLKSE
@@ -107,6 +109,11 @@ WADLSSRLARSFDREGFSIQPKDIMWRTTDQLYDGLGDSPFPLIFAVPILKGDVCWVMPEQEMVLLETWLLTKESHPISF
 
 - Confirm that the samplesheet in the working directory points to the FASTA file for the first complex to be predicted.
 
+```bash
+cat samplesheet.csv
+```
+
+output:
 ``` csv
 id,sequence
 pair1,fasta/SctD-complex.fasta
@@ -134,6 +141,7 @@ pair1,fasta/SctD-complex.fasta
 > ~~~
 > {: .source}
 >
+> output:
 > ~~~
 > withName: 'RUN_ALPHAFOLD2_PRED' {
 >     container = '/scratch/references/abacbs2025/containers/alphafold2_pred-single.sif'
@@ -212,7 +220,17 @@ nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \
 - Observe in the full run that the 2 MSA jobs are executed in parallel.
 - Note that this will depend on the resources available when the workflow is being executed.
 
-## 
+## Results
+
+- Using your **local terminal**, download the `pair1_alphafold2_report.html` and `pair1_alphafold2_report.html` files from the `output-multimer/generate/` directory.
+
+``` bash
+scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/output/generate/pair*_alphafold2_report.html ./
+```
+- **Windows users** can download from WinSCP.
+- From your file browser, open the HTML reports to visualise outputs in your web browser.
+
+
 > ## Thought: 
 > - Can we screen for potential interactions systematically?
 {: .prereq}

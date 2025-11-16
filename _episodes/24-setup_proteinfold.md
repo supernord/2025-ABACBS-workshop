@@ -33,7 +33,7 @@ ls
 ## nf-core/proteinfold
 - [proteinfold](https://github.com/nf-core/proteinfold/tree/dev) is a Nextflow pipeline designed to support numerous models for molecular structure prediction.
 - Today, we will use proteinfold to predict the structure of our uncharacterised protein using the AlphaFold2 model.
-- We will use a development branch of proteinfold to access some of the latest features that are not yet available in the current release.
+- We will use a development branch (commit: 09ac089) to access some of the latest features that are not yet available in the current release.
 
 ```bash
 #module load nextflow/25.04.6 # This should still be loaded from the previous exercise
@@ -79,7 +79,7 @@ tree ~/.nextflow/assets/nf-core/proteinfold/
 > ls $NXF_SINGULARITY_LIBRARYDIR
 > ~~~
 > {: .source}
->
+> output:
 > ~~~
 > alphafold2_pred.sif
 > alphafold2.sif

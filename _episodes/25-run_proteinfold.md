@@ -5,15 +5,23 @@ exercises: 10
 questions:
 objectives:
 - Run nfcore/proteinfold Nextflow workflow on Setonix.
+- Monitor resource allocation and utilisation.
 - Evaluate the cost of execution.
 keypoints:
+- We can monitor reource utilisation by connecting to a worker node.
 - Running AlphaFold2 in split mode can significantly reduce SU consumption.
 ---
 
 ## Prepare samplesheet
 
-We can prepare a nextflow samplesheet containing our protein input in fasta format. Multiple proteins can be predicted with a single workflow execution by adding rows to an input samplesheet.
+- We have prepared a nextflow samplesheet containing our protein input in fasta format.
+- Each prediction must be given a unique `id` and an input file containing the target `sequence`
 
+```bash
+cat samplesheet.csv
+```
+
+output:
 ``` csv
 id,sequence
 sample0,fasta/PNK_0205.fasta
