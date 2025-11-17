@@ -33,7 +33,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > ## Input form
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-fseek.png" alt="foldseek" width="800"/>
+> <img src="../assets/img/abacbs-fseek.png" alt="foldseek" width="800"/>
 > </p>
 > {% endraw %}
 > - Ensure that the check-boxes for all databases are selected.
@@ -41,7 +41,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 
 > ## Results
 > {% raw %}
-> <img src="/assets/img/abacbs-fseek-res.png" alt="fseek-res" width="1200"/>
+> <img src="../assets/img/abacbs-fseek-res.png" alt="fseek-res" width="1200"/>
 > {% endraw %}
 > 
 > - Browse the tabs to see the top hits in various protein structure databases.
@@ -61,7 +61,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise2/outpu
 > ## Input form
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-spfast1.png" alt="spfast1" width="800"/>
+> <img src="../assets/img/abacbs-spfast1.png" alt="spfast1" width="800"/>
 > </p>
 > {% endraw %}
 {: .keypoints}

@@ -52,7 +52,7 @@ We’ll examine a gene annotated as a conserved hypothetical protein (locus tag 
 > 
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs_workshop_process.png" alt="workshop" width="1000"/>
+> <img src="../assets/img/abacbs_workshop_process.png" alt="workshop" width="1000"/>
 > </p>
 > {% endraw %}
 {: .prereq}

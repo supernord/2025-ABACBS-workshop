@@ -72,7 +72,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/outpu
 External resource: [EBI AlphaFold guide - pLDDT](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/plddt-understanding-local-confidence/)
 
 <p align="center">
-<img src="/assets/img/abacbs-plddt.png" alt="plddt" width="800"/>
+<img src="../assets/img/abacbs-plddt.png" alt="plddt" width="800"/>
 </p>
 
 > ## Interpretation
@@ -91,7 +91,7 @@ External resources:
 - [EBI AlphaFold guide - confidence](https://www.ebi.ac.uk/training/online/courses/alphafold/inputs-and-outputs/evaluating-alphafolds-predicted-structures-using-confidence-scores/confidence-scores-in-alphafold-multimer/)
 
 <p align="center">
-<img src="/assets/img/abacbs-pae.png" alt="pae" width="600"/>
+<img src="../assets/img/abacbs-pae.png" alt="pae" width="600"/>
 </p>
 
 > ## Interpretation
@@ -107,7 +107,7 @@ External resources:
 ## Sequence coverage
 
 <p align="center">
-<img src="/assets/img/abacbs-msa.png" alt="msa" width="800"/>
+<img src="../assets/img/abacbs-msa.png" alt="msa" width="800"/>
 </p>
 
 > ## Interpretation
@@ -134,7 +134,7 @@ External resources:
 > ## Example 1
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-report-example1.png" alt="ex1" width="800"/>
+> <img src="../assets/img/abacbs-report-example1.png" alt="ex1" width="800"/>
 > </p>       
 > {% endraw %}
 > 
@@ -158,7 +158,7 @@ External resources:
 > ## Example 2
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-report-example2.png" alt="ex2" width="800"/>
+> <img src="../assets/img/abacbs-report-example2.png" alt="ex2" width="800"/>
 > </p>       
 > {% endraw %}
 > 

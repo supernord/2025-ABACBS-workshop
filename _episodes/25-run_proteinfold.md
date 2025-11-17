@@ -31,7 +31,7 @@ sample0,fasta/PNK_0205.fasta
 ## Basic run
 
 <p align="center">
-<img src="/assets/img/abacbs-af2-normal.png" alt="af2normal" width="600"/>
+<img src="../assets/img/abacbs-af2-normal.png" alt="af2normal" width="600"/>
 </p>
 
 
@@ -99,7 +99,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/outpu
 > - Here is an example timeline from a full AlphaFold2 run for this target protein.
 > - Your execution time will be greatly reduced by using **dummy** miniature databases and generating only a single AlphaFold2 model output.
 > {% raw %}
-> <img src="/assets/img/abacbs-af2-timeline.png" alt="af2tl" width="1200"/>
+> <img src="../assets/img/abacbs-af2-timeline.png" alt="af2tl" width="1200"/>
 > {% endraw %}
 {: .solution }
 
@@ -125,7 +125,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/outpu
 ## Split MSA run
 
 <p align="center">
-<img src="/assets/img/abacbs-af2-split.png" alt="af2split" width="800"/>
+<img src="../assets/img/abacbs-af2-split.png" alt="af2split" width="800"/>
 </p>
 
 - Recall that AlphaFold2 relies on generating an MSA by searching large sequence databases.
@@ -156,7 +156,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise3/outpu
 > - Here is an example timeline from a full AlphaFold2 run using `"split_msa_prediction` for this target protein.
 > - Your execution time will be greatly reduced by using **dummy** miniature databases and generating only a single AlphaFold2 model output.
 > {% raw %}
-> <img src="/assets/img/abacbs-af2split-timeline.png" alt="af2-splittl" width="1200"/>
+> <img src="../assets/img/abacbs-af2split-timeline.png" alt="af2-splittl" width="1200"/>
 > {% endraw %}
 >
 >

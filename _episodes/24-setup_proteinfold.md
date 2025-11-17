@@ -13,7 +13,7 @@ keypoints:
 ---
 
 <p align="center">
-<img src="/assets/img/abacbs-proteinfold-metromap.svg" alt="pfold" width="800"/>
+<img src="../assets/img/abacbs-proteinfold-metromap.svg" alt="pfold" width="800"/>
 </p>
 
 ## Setup

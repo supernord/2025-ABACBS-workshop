@@ -13,7 +13,7 @@ keypoints:
 ---
 
 <p align="center">
-<img src="/assets/img/abacbs-t3ss.png" alt="af2split" width="400"/>
+<img src="../assets/img/abacbs-t3ss.png" alt="af2split" width="400"/>
 </p>
 
 **Available from:** *Samuel Wagner, Iwan Grin, Silke Malmsheimer, Nidhi Singh, Claudia E Torres-Vargas, Sibel Westerhausen, Bacterial type III secretion systems: a complex device for the delivery of bacterial effector proteins into eukaryotic host cells, FEMS Microbiology Letters, Volume 365, Issue 19, October 2018, fny201,*
@@ -219,7 +219,7 @@ nextflow run nf-core/proteinfold --input samplesheet.csv --outdir output \
 
 ## Execution timeline
 <p align="center">
-<img src="/assets/img/abacbs-multimer-parallel.png" alt="pae" width="600"/>
+<img src="../assets/img/abacbs-multimer-parallel.png" alt="pae" width="600"/>
 </p>
 - Observe in the full run that the 2 MSA jobs are executed in parallel.
 - Note that this will depend on the resources available when the workflow is being executed.
@@ -237,7 +237,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/outpu
 > ## SctD
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-sctd-complex.png" alt="sctd-complex" width="800"/>
+> <img src="../assets/img/abacbs-sctd-complex.png" alt="sctd-complex" width="800"/>
 > </p>
 > {% endraw %}
 > - Our uncharacterised protein forms a high confidence interaction with SctD
@@ -246,7 +246,7 @@ scp <username>@setonix.pawsey.org.au:/scratch/courses/<username>/exercise4/outpu
 > ## SctK
 > {% raw %}
 > <p align="center">
-> <img src="/assets/img/abacbs-sctq-complex.png" alt="sctk-complex" width="800"/>
+> <img src="../assets/img/abacbs-sctq-complex.png" alt="sctk-complex" width="800"/>
 > </p>
 > {% endraw %}
 > - Our uncharacterised protein forms a high confidence interaction with SctQ
